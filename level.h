@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL.h>
+#include "Tekstura.h"
 
 class level
 {
@@ -13,6 +13,6 @@ private:
 	int _rowSpacing = 1;
 	int _columnSpacing = 1;
 
-	SDL_Texture* background = NULL;
+	Tekstura background = Tekstura();
 };
 

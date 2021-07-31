@@ -1,9 +1,31 @@
 #include <iostream>
 #include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "tinyxml2.h"
 
 using namespace tinyxml2;
 using namespace std;
+
+TTF_Font* gameFont = NULL;
+SDL_Window* gameWindow = NULL;
+SDL_Renderer* gameRenderer = NULL;
+
+void close()
+{
+	//Destroy window    
+	SDL_DestroyRenderer( gameRenderer );
+	gameRenderer = NULL;
+	SDL_DestroyWindow( gameWindow );
+	gameWindow = NULL;
+	TTF_CloseFont( gameFont );
+	gameFont = NULL;
+
+	//Quit SDL subsystems
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
+}
 
 int main(int argc, char* argv[]) {
 
@@ -31,10 +53,19 @@ int main(int argc, char* argv[]) {
 	}
 	
 
-	cout << "opa" << endl;
+	
+	//Clear screen
+	SDL_RenderClear(gameRenderer);
 
+	//Render texture to screen
+	//SDL_RenderCopy(gameRenderer, gameTexture, NULL, NULL);
+
+	//Update screen
+	SDL_RenderPresent(gameRenderer);
 
 
 	getchar();
+
+	close();
 	return EXIT_SUCCESS;
 }
