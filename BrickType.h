@@ -2,7 +2,7 @@
 #include "tekstura.h"
 #include <string>
 
-class brickResources 
+class brickResources //flyweight
 {
 public:
 	brickResources(std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath);  //loads .wav or .ogg vorbis music format
@@ -12,6 +12,11 @@ public:
 	//friend class BrickType; // if brickType in the future will need to change any of the private members - it can but usually they won't be touched after they're loaded 
 
 private:
+	std::string originalID = "_";
+	int originalhitpoints = 0;
+	int originalBreakScore = 0;
+	bool originalIsBreakable = true;
+
 	Tekstura _brickTexture = Tekstura();
 	Mix_Chunk* _hitSound = NULL;
 	Mix_Chunk* _breakSound = NULL;
@@ -24,10 +29,10 @@ public:
 	brickResources* loseHP(); //when hit by ball change resources accordingly to number of hp left
 
 private:
-	char _ID = 'a';
+	std::string _ID = "_";
 	int _hitpoints = 1;
 	int _breakScore = 1;
-	bool _isBreakable = false;
+	bool _isBreakable = true;
 
 	int x = 0; //position on the lvl
 	int y = 0; //position on the lvl

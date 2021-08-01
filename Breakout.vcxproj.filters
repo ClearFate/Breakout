@@ -27,10 +27,10 @@
     <ClCompile Include="Tekstura.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
+    <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
+    <ClCompile Include="GameUtilityFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="Tekstura.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoader.h">
+    <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
+    <ClInclude Include="GameUtilityFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

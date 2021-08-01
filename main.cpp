@@ -1,9 +1,4 @@
-#include <iostream>
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
-#include "Level.h"
+#include "GameUtilityFunctions.h"
 
 //global game context
 const int GAME_WIDTH = 640;
@@ -17,31 +12,20 @@ vector<Level> gameLevelList;
 //------------------------------------------------------------
 
 
-void close()
-{
-	//Destroy window    
-	SDL_DestroyRenderer( gameRenderer );
-	gameRenderer = NULL;
-	SDL_DestroyWindow( gameWindow );
-	gameWindow = NULL;
-	TTF_CloseFont( gameFont );
-	gameFont = NULL;
-
-	//Quit SDL subsystems
-	TTF_Quit();
-	IMG_Quit();
-	Mix_Quit();
-	SDL_Quit();
-}
 
 int main(int argc, char* argv[]) {
 
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "SDL could not initialise! SDL error: " << SDL_GetError() << std::endl;
+	
+	//if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+	//	std::cout << "SDL could not initialise! SDL error: " << SDL_GetError() << std::endl;
+	//}
+	if (GameUtil::init("Breakout") == false) {
+		std::cout << "\nIgra nije uspjela ucitati potrebne podsisteme.\nTerminirano izvrsavanje igre.\n";
+		//return -1;
 	}
 
-	
+	GameUtil::loadLevel("levelsXML.xml");
+
 
 	
 	//Clear screen
@@ -56,6 +40,6 @@ int main(int argc, char* argv[]) {
 
 	getchar();
 
-	close();
+	GameUtil::close();
 	return EXIT_SUCCESS;
 }
