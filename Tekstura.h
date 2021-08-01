@@ -11,7 +11,6 @@ extern TTF_Font* gameFont;
 class Tekstura
 {
 public:
-	Tekstura();
 	~Tekstura();
 
 	void render(int x, int y, SDL_Rect* Clip, double kut, SDL_Point* centar, SDL_RendererFlip zrcaljenje);
@@ -29,9 +28,9 @@ public:
 
 private:
 
-	int _width;
-	int _height;
-	SDL_Texture* _texture;
+	int _width = 0;
+	int _height = 0;
+	SDL_Texture* _texture = NULL;
 
 };
 

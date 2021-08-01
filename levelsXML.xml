@@ -44,8 +44,8 @@
 </Level>
 
 <Level   
-    RowCount="3"   
-    ColumnCount="20"   
+    RowCount="4"   
+    ColumnCount="15"   
     RowSpacing="3"  
     ColumnSpacing="3"  
     BackgroundTexture="Textures/Boards/Board_01.dds">  
@@ -89,8 +89,8 @@
 </Level>
 
 <Level   
-    RowCount="3"   
-    ColumnCount="20"   
+    RowCount="2"   
+    ColumnCount="13"   
     RowSpacing="3"  
     ColumnSpacing="3"  
     BackgroundTexture="Textures/Boards/Board_01.dds">  

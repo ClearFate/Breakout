@@ -19,6 +19,7 @@ extern SDL_Renderer* gameRenderer;
 namespace GameUtil {
 
 	bool init(std::string nazivIgre);
+	bool loadGameFont();
 	bool loadLevel(std::string XMLpath);
 	void close();
 	

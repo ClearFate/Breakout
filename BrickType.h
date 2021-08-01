@@ -5,7 +5,7 @@
 class brickResources //flyweight
 {
 public:
-	brickResources(std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath);  //loads .wav or .ogg vorbis music format
+	brickResources(std::string id, int hp, int breakScore, bool canBeBroken, std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath);  //loads .wav or .ogg vorbis music format
 	~brickResources();
 	void free();
 
@@ -13,8 +13,8 @@ public:
 
 private:
 	std::string originalID = "_";
-	int originalhitpoints = 0;
-	int originalBreakScore = 0;
+	int originalhitpoints = 50;
+	int originalBreakScore = 50;
 	bool originalIsBreakable = true;
 
 	Tekstura _brickTexture = Tekstura();

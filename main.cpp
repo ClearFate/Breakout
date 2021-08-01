@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 		std::cout << "\nIgra nije uspjela ucitati potrebne podsisteme.\nTerminirano izvrsavanje igre.\n";
 		//return -1;
 	}
+	GameUtil::loadGameFont();
 
 	GameUtil::loadLevel("levelsXML.xml");
 
@@ -37,9 +38,11 @@ int main(int argc, char* argv[]) {
 	//Update screen
 	SDL_RenderPresent(gameRenderer);
 
+	for (auto& lvl : gameLevelList) {
+		lvl.destroyLevel();
+	}
 
 	getchar();
-
 	GameUtil::close();
 	return EXIT_SUCCESS;
 }

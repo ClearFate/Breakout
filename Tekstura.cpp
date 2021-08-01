@@ -1,12 +1,5 @@
 #include "Tekstura.h"
 
-Tekstura::Tekstura() {
-
-    _texture = NULL;
-    _width = 0;
-    _height = 0;
-}
-
 Tekstura::~Tekstura() {
     free();
 }

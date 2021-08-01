@@ -3,6 +3,25 @@
 using namespace tinyxml2;
 using namespace std;
 
+const char* extractAttribute(XMLElement* element, const char* attr) {  // helper func to avoid errors when extracting xml
+	const char* result = element->Attribute(attr);
+	if (result != nullptr){
+		return result;
+	}
+	else {
+		return "";
+	}
+}
+
+bool GameUtil::loadGameFont() {
+	gameFont = TTF_OpenFont("font/DejaVuMathTeXGyre.ttf", 24);
+	if (gameFont == NULL) {
+		printf("Greska pri ucitavanju game fonta: %s \n", TTF_GetError());
+	}
+	return gameFont != NULL;
+}
+
+
 bool GameUtil::loadLevel(string XMLpath)  
 {
 	// test tinyXML
@@ -18,10 +37,10 @@ bool GameUtil::loadLevel(string XMLpath)
 
 	while (levelData != nullptr) {
 
-		int newRowCount = atoi(levelData->Attribute("RowCount"));
-		int newColumnCount = atoi(levelData->Attribute("ColumnCount"));
-		int newRowSpacing = atoi(levelData->Attribute("RowSpacing"));
-		int newColumnSpacing = atoi(levelData->Attribute("ColumnSpacing"));
+		int newRowCount = atoi(extractAttribute(levelData,"RowCount"));
+		int newColumnCount = atoi(extractAttribute(levelData,"ColumnCount"));
+		int newRowSpacing = atoi(extractAttribute(levelData,"RowSpacing"));
+		int newColumnSpacing = atoi(extractAttribute(levelData, "ColumnSpacing"));
 		const char* newBgPath = levelData->Attribute("BackgroundTexture");
 		const char* newLvlLayout = levelData->FirstChildElement("Bricks")->GetText();
 		string newBackgroundPath = "";
@@ -33,20 +52,31 @@ bool GameUtil::loadLevel(string XMLpath)
 		if (newLvlLayout != nullptr)
 			newLevelLayout = string(newLvlLayout);
 
+		Level newLevel = Level(newRowCount, newColumnCount, newRowSpacing, newColumnSpacing, newBackgroundPath, newLevelLayout);
+
+		// calculate brick size according to game window size, number of bricks and spacing between them
+		int columnSpacesCount = newColumnCount + 1;
+		int rowSpacesCount = newRowCount + 1;
+		int brickPlacementArea = GAME_HEIGHT * 0.7;
+
+		int brickWidth = (GAME_WIDTH - (columnSpacesCount) * newColumnSpacing) / newColumnCount;
+		int brickHeight = (brickPlacementArea - (rowSpacesCount)*newRowSpacing) / newRowCount;
+		//----------------------------------------------------------------------------------------------
+
 		XMLElement* brickData = levelData->FirstChildElement("BrickTypes")->FirstChildElement("BrickType");
 
 		while (brickData != nullptr) {
 
 			string newBrickId = "";
-			int newHitPoints = atoi(brickData->Attribute("HitPoints"));
-			int newBreakScore = atoi(brickData->Attribute("BreakScore"));  // jako krhko cim ne nadje atribut ovo puca
+			int newHitPoints = atoi(extractAttribute(brickData,"HitPoints"));
+			int newBreakScore = atoi(extractAttribute(brickData,"BreakScore"));  // jako krhko cim ne nadje atribut ovo puca
 			bool newIsBreakable = true;
 			const char* brickId = brickData->Attribute("Id");
 
 			if (brickId != nullptr){
 				newBrickId = string(brickId);
 				
-				if (brickId == "I") {
+				if (newBrickId.compare("I") == 0) {
 					newIsBreakable = false;
 				}
 			}
@@ -69,9 +99,9 @@ bool GameUtil::loadLevel(string XMLpath)
 				newBrickBreakSoundPath = string(brickBreakSoundPath);
 
 			//SDL LOAD MEDIA RESOURCES PART
+			brickResources* newBrickResource = new brickResources(newBrickId, newHitPoints, newBreakScore, newIsBreakable, newBrickTexturePath, brickWidth, brickHeight, newBrickHitSoundPath, newBrickBreakSoundPath);  // allocated on heap
 
-
-
+			newLevel.addResource(newBrickResource);
 			//------------------------------------------
 
 			//cout << brickData->Attribute("Id") << " ";
@@ -84,7 +114,8 @@ bool GameUtil::loadLevel(string XMLpath)
 		//cout << "==========================================================================================\n";
 		//cout << levelData->FirstChildElement("Bricks")->GetText() << endl;
 		//cout << "==========================================================================================\n";
-		
+		gameLevelList.push_back(newLevel);
+
 		levelData = levelData->NextSiblingElement("Level");
 	}
 
