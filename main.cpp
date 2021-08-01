@@ -2,14 +2,20 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include "tinyxml2.h"
+#include <SDL_mixer.h>
+#include "Level.h"
 
-using namespace tinyxml2;
-using namespace std;
+//global game context
+const int GAME_WIDTH = 640;
+const int GAME_HEIGHT = 480;
 
 TTF_Font* gameFont = NULL;
 SDL_Window* gameWindow = NULL;
 SDL_Renderer* gameRenderer = NULL;
+
+vector<Level> gameLevelList;
+//------------------------------------------------------------
+
 
 void close()
 {
@@ -24,6 +30,7 @@ void close()
 	//Quit SDL subsystems
 	TTF_Quit();
 	IMG_Quit();
+	Mix_Quit();
 	SDL_Quit();
 }
 
@@ -31,26 +38,9 @@ int main(int argc, char* argv[]) {
 
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		cout << "SDL could not initialise! SDL error: " << SDL_GetError() << endl;
+		std::cout << "SDL could not initialise! SDL error: " << SDL_GetError() << std::endl;
 	}
 
-	// test tinyXML
-	XMLDocument doc(true,COLLAPSE_WHITESPACE);
-
-	// load xml level
-	if (doc.LoadFile("levelsXML.xml")) {
-		cout << "Error opening xml document!" << endl;
-		return doc.ErrorID();
-	}
-
-	XMLElement* level = doc.FirstChildElement("Level"); 
-
-	while(level != nullptr) {
-		cout << "==========================================================================================\n";
-		cout << level->FirstChildElement("Bricks")->GetText() << endl;
-		cout << "==========================================================================================\n";
-		level = level->NextSiblingElement("Level");
-	}
 	
 
 	

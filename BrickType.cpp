@@ -24,7 +24,12 @@ brickResources::brickResources(std::string texturePath, int sirina, int visina, 
 }
 
 brickResources::~brickResources() {
-	//Tekstura class already frees memory when destroyed
+	free();
+}
+
+void brickResources::free()
+{
+	_brickTexture.free();
 	Mix_FreeChunk(_hitSound);  //if _hitSound is already nullptr does this throw exception ?
 	Mix_FreeChunk(_breakSound);
 }

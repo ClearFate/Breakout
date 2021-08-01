@@ -149,14 +149,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BrickType.cpp" />
-    <ClCompile Include="level.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tekstura.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrickType.h" />
-    <ClInclude Include="level.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Tekstura.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>

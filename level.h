@@ -4,11 +4,17 @@
 #include <vector>
 using std::vector;
 
-class level
+extern const int GAME_WIDTH;
+extern const int GAME_HEIGHT;
+
+class Level
 {
 public:
-	level();
-	~level();
+	Level(int rowCount, int columnCount, int rowSpacing, int columnSpacing, std::string backgroundPath, std::string levelLayout);
+	~Level();
+	void destroyLevel();
+
+	//populateResources();
 
 private:
 	int _rowCount = 1;
@@ -16,9 +22,11 @@ private:
 	int _rowSpacing = 1;
 	int _columnSpacing = 1;
 
-	vector<brickResources> resources;  // level holds reference to every texture/sound needed to build level just once
-	vector < vector<BrickType*> > brickList; //bricks on the level
+	std::string _levelLayout = "";
 
-	Tekstura background = Tekstura();
+	vector<brickResources> _resources;  // level holds reference to every texture/sound needed to build level just once
+	vector < vector<BrickType*> > _brickList; //bricks on the level
+
+	Tekstura _background = Tekstura();
 };
 

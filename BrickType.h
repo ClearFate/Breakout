@@ -7,6 +7,7 @@ class brickResources
 public:
 	brickResources(std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath);  //loads .wav or .ogg vorbis music format
 	~brickResources();
+	void free();
 
 	//friend class BrickType; // if brickType in the future will need to change any of the private members - it can but usually they won't be touched after they're loaded 
 
