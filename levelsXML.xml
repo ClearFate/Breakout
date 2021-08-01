@@ -3,38 +3,38 @@
     ColumnCount="20"   
     RowSpacing="3"  
     ColumnSpacing="3"  
-    BackgroundTexture="Textures/Boards/Board_01.dds">  
+    BackgroundTexture="images/3hp.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
             Id="S"   
-            Texture="Textures/Bricks/Soft.dds"   
+            Texture="images/1hp.png"   
             HitPoints="1"   
             HitSound="Sounds/Hit_01.wav"  
-            BreakSound="Sounds/Break_01.wav"  
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
         <BrickType  
             Id="M"   
-            Texture="Textures/Bricks/Medium.dds"   
+            Texture="images/2hp.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_02.wav"  
-            BreakSound="Sounds/Break_02.wav"  
+            HitSound="Sounds/Hit_01.wav"  
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
         <BrickType   
             Id="H"   
-            Texture="Textures/Bricks/Hard.dds"   
+            Texture="images/3hp.png"   
             HitPoints="3"   
-            HitSound="Sounds/Hit_03.wav"   
-            BreakSound="Sounds/Break_03.wav"  
+            HitSound="Sounds/hit03.ogg"   
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="150" />  
         <!-- Impenetrable Brick -->  
         <BrickType  
             Id="I"   
-            Texture="Textures/Bricks/Impenetrable.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/Hit_04.wav" />  
+            HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
         H H H H H H H H H H H H H H H H H H H H  
@@ -48,38 +48,38 @@
     ColumnCount="15"   
     RowSpacing="3"  
     ColumnSpacing="3"  
-    BackgroundTexture="Textures/Boards/Board_01.dds">  
+    BackgroundTexture="images/unbreakable.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
             Id="S"   
-            Texture="Textures/Bricks/Soft.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="1"   
             HitSound="Sounds/Hit_01.wav"  
-            BreakSound="Sounds/Break_01.wav"  
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
         <BrickType  
             Id="M"   
-            Texture="Textures/Bricks/Medium.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_02.wav"  
-            BreakSound="Sounds/Break_02.wav"  
+            HitSound="Sounds/Hit_01.wav"  
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
         <BrickType   
             Id="H"   
-            Texture="Textures/Bricks/Hard.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="3"   
-            HitSound="Sounds/Hit_03.wav"   
-            BreakSound="Sounds/Break_03.wav"  
+            HitSound="Sounds/Hit_01.wav"   
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="150" />  
         <!-- Impenetrable Brick -->  
         <BrickType  
             Id="I"   
-            Texture="Textures/Bricks/Impenetrable.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/Hit_04.wav" />  
+            HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
         H H H H H H H H H H H H H H H H H H H H  
@@ -93,38 +93,38 @@
     ColumnCount="13"   
     RowSpacing="3"  
     ColumnSpacing="3"  
-    BackgroundTexture="Textures/Boards/Board_01.dds">  
+    BackgroundTexture="images/unbreakable.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
             Id="S"   
-            Texture="Textures/Bricks/Soft.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="1"   
             HitSound="Sounds/Hit_01.wav"  
-            BreakSound="Sounds/Break_01.wav"  
+            BreakSound="Sounds/Hit_01.wav"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
         <BrickType  
             Id="M"   
-            Texture="Textures/Bricks/Medium.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_02.wav"  
-            BreakSound="Sounds/Break_02.wav"  
+            HitSound="Sounds/Hit_01.wav"  
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
         <BrickType   
             Id="H"   
-            Texture="Textures/Bricks/Hard.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="3"   
-            HitSound="Sounds/Hit_03.wav"   
-            BreakSound="Sounds/Break_03.wav"  
+            HitSound="Sounds/hit02.ogg"   
+            BreakSound="Sounds/break01.ogg"  
             BreakScore="150" />  
         <!-- Impenetrable Brick -->  
         <BrickType  
             Id="I"   
-            Texture="Textures/Bricks/Impenetrable.dds"   
+            Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/Hit_04.wav" />  
+            HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
         H H H H H H H H H H H H H H H H H H H H  

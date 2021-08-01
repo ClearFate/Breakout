@@ -14,7 +14,7 @@ const char* extractAttribute(XMLElement* element, const char* attr) {  // helper
 }
 
 bool GameUtil::loadGameFont() {
-	gameFont = TTF_OpenFont("font/DejaVuMathTeXGyre.ttf", 24);
+	gameFont = TTF_OpenFont("font/AttackGraffiti-3zRBM.ttf", 24);
 	if (gameFont == NULL) {
 		printf("Greska pri ucitavanju game fonta: %s \n", TTF_GetError());
 	}

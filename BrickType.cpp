@@ -29,10 +29,10 @@ brickResources::brickResources(std::string id, int hp, int breakScore, bool canB
 	if(! _brickTexture.loadScaledFromFile(texturePath, sirina, visina))
 		printf("Failed to load brick texture \"%s\" !\n", texturePath.c_str());
 
-	if (_hitSound == NULL)
+	if (_hitSound == NULL && !hitSoundPath.empty())
 		printf("Failed to load hit sound effect \"%s\"! SDL_mixer Error: %s\n", hitSoundPath.c_str(), Mix_GetError());
 
-	if (_breakSound == NULL)
+	if (_breakSound == NULL && !breakSoundPath.empty())
 		printf("Failed to load break sound effect \"%s\"! SDL_mixer Error: %s\n", breakSoundPath.c_str(), Mix_GetError());
 
 }

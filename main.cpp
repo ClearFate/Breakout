@@ -1,8 +1,8 @@
 #include "GameUtilityFunctions.h"
 
 //global game context
-const int GAME_WIDTH = 640;
-const int GAME_HEIGHT = 480;
+const int GAME_WIDTH = 1080;
+const int GAME_HEIGHT = 720;
 
 TTF_Font* gameFont = NULL;
 SDL_Window* gameWindow = NULL;
