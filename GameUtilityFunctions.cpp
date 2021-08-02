@@ -13,6 +13,52 @@ const char* extractAttribute(XMLElement* element, const char* attr) {  // helper
 	}
 }
 
+void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string levelLayout, std::string delimiter) {
+	int rowCount = lvl.getRowCount();
+	int columnCount = lvl.getColumnCount();
+	int rowSpacing = lvl.getRowSpacing();
+	int columnSpacing = lvl.getColumnSpacing();
+
+	int x = 0;
+	int y = 0;
+	size_t tokenEnd = 0;
+	std::string brickIdToken;
+
+	for (int fullRows = 0; fullRows < rowCount; fullRows++) {
+		y += rowSpacing;
+
+		vector<BrickType> brickRow;
+
+		for (int bricksPlacedInRow = 0; bricksPlacedInRow < columnCount; bricksPlacedInRow++) {
+			x += columnSpacing;
+
+			//split one token out of levelLayout string
+			tokenEnd = levelLayout.find(delimiter);
+			brickIdToken = levelLayout.substr(0, tokenEnd);
+			levelLayout.erase(0, tokenEnd + delimiter.length());
+
+			//search in brick resources to find to what ID token matches to
+			brickResources* foundRes = lvl.findMatchingResourceById(brickIdToken);
+			if (foundRes == nullptr) {
+				x += brickWidth; // ako nema pronadjene kocke to bude onda prazno mjesto na mapi (moras tu stavit jer continue preskoci onaj kasniji)
+				continue;
+			}
+			BrickType newBrick = BrickType(foundRes->getId(), foundRes->getHitpoints(), foundRes->getBreakScore(), foundRes->getIsBreakable(), foundRes);
+			newBrick.x = x;
+			newBrick.y = y;
+
+			brickRow.push_back(newBrick);
+
+			x += brickWidth;
+		}
+		lvl._brickList.push_back(brickRow);
+
+		y += brickHeight;
+	}
+	
+
+}
+
 bool GameUtil::loadGameFont() {
 	gameFont = TTF_OpenFont("font/AttackGraffiti-3zRBM.ttf", 24);
 	if (gameFont == NULL) {
@@ -24,7 +70,6 @@ bool GameUtil::loadGameFont() {
 
 bool GameUtil::loadLevel(string XMLpath)  
 {
-	// test tinyXML
 	XMLDocument doc(true, COLLAPSE_WHITESPACE);  // to have nicely formated level layout when queried
 
 	// load xml level
@@ -52,7 +97,7 @@ bool GameUtil::loadLevel(string XMLpath)
 		if (newLvlLayout != nullptr)
 			newLevelLayout = string(newLvlLayout);
 
-		Level newLevel = Level(newRowCount, newColumnCount, newRowSpacing, newColumnSpacing, newBackgroundPath, newLevelLayout);
+		Level newLevel = Level(newRowCount, newColumnCount, newRowSpacing, newColumnSpacing, newBackgroundPath);
 
 		// calculate brick size according to game window size, number of bricks and spacing between them
 		int columnSpacesCount = newColumnCount + 1;
@@ -104,18 +149,11 @@ bool GameUtil::loadLevel(string XMLpath)
 			newLevel.addResource(newBrickResource);
 			//------------------------------------------
 
-			//cout << brickData->Attribute("Id") << " ";
-
 			brickData = brickData->NextSiblingElement("BrickType");
 		}
-		cout << endl;
-		//Level newLoadedLevel = Level(int rowCount, int columnCount, int rowSpacing, int columnSpacing, std::string backgroundPath, std::string levelLayout);
+		parseLevelLayout(newLevel, brickWidth, brickHeight, newLevelLayout, " ");
 
-		//cout << "==========================================================================================\n";
-		//cout << levelData->FirstChildElement("Bricks")->GetText() << endl;
-		//cout << "==========================================================================================\n";
 		gameLevelList.push_back(newLevel);
-
 		levelData = levelData->NextSiblingElement("Level");
 	}
 

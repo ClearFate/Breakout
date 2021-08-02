@@ -9,13 +9,17 @@ public:
 	~brickResources();
 	void free();
 
+	std::string getId();
+	int getHitpoints();
+	int getBreakScore();
+	bool getIsBreakable();
 	//friend class BrickType; // if brickType in the future will need to change any of the private members - it can but usually they won't be touched after they're loaded 
 
 private:
-	std::string originalID = "_";
-	int originalhitpoints = 50;
-	int originalBreakScore = 50;
-	bool originalIsBreakable = true;
+	std::string _originalID = "_";
+	int _originalhitpoints = 50;
+	int _originalBreakScore = 50;
+	bool _originalIsBreakable = true;
 
 	Tekstura _brickTexture = Tekstura();
 	Mix_Chunk* _hitSound = NULL;
@@ -25,8 +29,12 @@ private:
 class BrickType
 {
 public:
-	BrickType(char id, int hp, int score, bool breakable, brickResources& resource);
+	BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource);
 	brickResources* loseHP(); //when hit by ball change resources accordingly to number of hp left
+
+	int x = 0; //position on the lvl
+	int y = 0; //position on the lvl
+	
 
 private:
 	std::string _ID = "_";
@@ -34,11 +42,8 @@ private:
 	int _breakScore = 1;
 	bool _isBreakable = true;
 
-	int x = 0; //position on the lvl
-	int y = 0; //position on the lvl
-
 	brickResources* _brick;
+	
 
-	  // TODO nakon svakog nivoa - mora se pozvat procedura za reloadanje tekstura brikova (jer moguce je da na sljedecem nivou budu drugacijih dimenzija)
 };
 

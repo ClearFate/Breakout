@@ -1,27 +1,27 @@
 #include "BrickType.h"
 
 
-BrickType::BrickType(char id, int hp, int score, bool breakable, brickResources& resource) {
+BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource) {
 
 	_ID = id;
 	_hitpoints = hp;
 	_breakScore = score;
 	_isBreakable = breakable;
-	_brick = &resource;
+	_brick = resource;
 }
 
 brickResources::brickResources(std::string id, int hp, int breakScore, bool canBeBroken, std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath) {
 	
 	if(!id.empty())
-		originalID = id;
+		_originalID = id;
 	
 	if(hp>0)
-		originalhitpoints = hp;
+		_originalhitpoints = hp;
 	
 	if(breakScore>0)
-		originalBreakScore = breakScore;
+		_originalBreakScore = breakScore;
 	
-	originalIsBreakable = canBeBroken;
+	_originalIsBreakable = canBeBroken;
 	
 	_hitSound = Mix_LoadWAV( hitSoundPath.c_str() );
 	_breakSound = Mix_LoadWAV( breakSoundPath.c_str() );
@@ -46,6 +46,26 @@ void brickResources::free()
 	_brickTexture.free();
 	Mix_FreeChunk(_hitSound);  //if _hitSound is already nullptr does this throw exception ?
 	Mix_FreeChunk(_breakSound);
+}
+
+std::string brickResources::getId()
+{
+	return _originalID;
+}
+
+int brickResources::getHitpoints()
+{
+	return _originalhitpoints;
+}
+
+int brickResources::getBreakScore()
+{
+	return _originalBreakScore;
+}
+
+bool brickResources::getIsBreakable()
+{
+	return _originalIsBreakable;
 }
 
    
