@@ -13,7 +13,7 @@ class Tekstura
 public:
 	~Tekstura();
 
-	void render(int x, int y, SDL_Rect* Clip, double kut, SDL_Point* centar, SDL_RendererFlip zrcaljenje);
+	void render(int x, int y, SDL_Rect* Clip = NULL, double kut = 0, SDL_Point* centar = NULL, SDL_RendererFlip zrcaljenje = SDL_FLIP_NONE);
 	bool loadScaledFromFile(std::string putanja, int duzina, int visina);  // ucitavanje png tekstura i skaliranje na odredjene dimenzije
 	bool loadShadedText(std::string tekst, SDL_Color bojaTeksta, SDL_Color bojaPozadine);
 	bool loadBlendedText(std::string tekst, SDL_Color bojaTeksta, int prelom);

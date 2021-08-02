@@ -10,6 +10,11 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 	_brick = resource;
 }
 
+brickResources* BrickType::getResources()
+{
+	return _brick;
+}
+
 brickResources::brickResources(std::string id, int hp, int breakScore, bool canBeBroken, std::string texturePath, int sirina, int visina, std::string hitSoundPath, std::string breakSoundPath) {
 	
 	if(!id.empty())
@@ -66,6 +71,21 @@ int brickResources::getBreakScore()
 bool brickResources::getIsBreakable()
 {
 	return _originalIsBreakable;
+}
+
+Tekstura* brickResources::getTexture()
+{
+	return &_brickTexture;
+}
+
+Mix_Chunk* brickResources::getHitSound()
+{
+	return _hitSound;
+}
+
+Mix_Chunk* brickResources::getBreakSound()
+{
+	return _breakSound;
 }
 
    

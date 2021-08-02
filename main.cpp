@@ -1,7 +1,7 @@
 #include "GameUtilityFunctions.h"
 
 //global game context
-const int GAME_WIDTH = 1080;
+const int GAME_WIDTH = 1366;
 const int GAME_HEIGHT = 720;
 
 TTF_Font* gameFont = NULL;
@@ -9,6 +9,8 @@ SDL_Window* gameWindow = NULL;
 SDL_Renderer* gameRenderer = NULL;
 
 vector<Level> gameLevelList;
+Tekstura gameBall = Tekstura();
+Tekstura gamePad = Tekstura();
 //------------------------------------------------------------
 
 
@@ -34,15 +36,20 @@ int main(int argc, char* argv[]) {
 
 	//Render texture to screen
 	//SDL_RenderCopy(gameRenderer, gameTexture, NULL, NULL);
+	GameUtil::renderBricks(gameLevelList[0]);
+	gameBall.render(500, 500);
+	gamePad.render(GAME_WIDTH / 2, GAME_HEIGHT - 50);
 
 	//Update screen
 	SDL_RenderPresent(gameRenderer);
 
+
+	
+
+	getchar();
 	for (auto& lvl : gameLevelList) {
 		lvl.destroyLevel();
 	}
-
-	getchar();
 	GameUtil::close();
 	return EXIT_SUCCESS;
 }

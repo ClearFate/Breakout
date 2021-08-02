@@ -15,12 +15,16 @@ extern vector<Level> gameLevelList;
 extern TTF_Font* gameFont;
 extern SDL_Window* gameWindow;
 extern SDL_Renderer* gameRenderer;
+extern Tekstura gameBall;
+extern Tekstura gamePad;
 
 namespace GameUtil {
 
 	bool init(std::string nazivIgre);
 	bool loadGameFont();
+	bool loadGamePadAndBall(int padWidth, int padHeight, int ballHeightAndWidth);
 	bool loadLevel(std::string XMLpath);
+	void renderBricks(Level& lvl);
 	void close();
 	
 }

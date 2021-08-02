@@ -1,4 +1,5 @@
 #include "GameUtilityFunctions.h"
+#include <cmath>
 
 using namespace tinyxml2;
 using namespace std;
@@ -54,6 +55,7 @@ void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string l
 		lvl._brickList.push_back(brickRow);
 
 		y += brickHeight;
+		x = 0;
 	}
 	
 
@@ -65,6 +67,22 @@ bool GameUtil::loadGameFont() {
 		printf("Greska pri ucitavanju game fonta: %s \n", TTF_GetError());
 	}
 	return gameFont != NULL;
+}
+
+bool GameUtil::loadGamePadAndBall(int padWidth, int padHeight, int ballHeightAndWidth) {
+	bool uspjelo = true;
+
+	if (!gameBall.loadScaledFromFile("images/ball2.png", ballHeightAndWidth, ballHeightAndWidth)) {
+		printf("Failed to load gameBall texture \"%s\" !\n", "images/ball.png");
+		uspjelo = false;
+	}
+	
+	if (!gamePad.loadScaledFromFile("images/pad.png", padWidth, padHeight)) {
+		printf("Failed to load gameBall texture \"%s\" !\n", "images/pad.png");
+		uspjelo = false;
+	}
+		
+	return uspjelo;
 }
 
 
@@ -105,7 +123,7 @@ bool GameUtil::loadLevel(string XMLpath)
 		int brickPlacementArea = GAME_HEIGHT * 0.7;
 
 		int brickWidth = (GAME_WIDTH - (columnSpacesCount) * newColumnSpacing) / newColumnCount;
-		int brickHeight = (brickPlacementArea - (rowSpacesCount)*newRowSpacing) / newRowCount;
+		int brickHeight = min(35, (brickPlacementArea - (rowSpacesCount)*newRowSpacing) / newRowCount); ;
 		//----------------------------------------------------------------------------------------------
 
 		XMLElement* brickData = levelData->FirstChildElement("BrickTypes")->FirstChildElement("BrickType");
@@ -145,6 +163,7 @@ bool GameUtil::loadLevel(string XMLpath)
 
 			//SDL LOAD MEDIA RESOURCES PART
 			brickResources* newBrickResource = new brickResources(newBrickId, newHitPoints, newBreakScore, newIsBreakable, newBrickTexturePath, brickWidth, brickHeight, newBrickHitSoundPath, newBrickBreakSoundPath);  // allocated on heap
+			loadGamePadAndBall(brickWidth*1.5, brickHeight/1.2, 20);
 
 			newLevel.addResource(newBrickResource);
 			//------------------------------------------
@@ -229,5 +248,16 @@ bool GameUtil::init(std::string nazivIgre) {
 	}
 
 	return uspjelo;
+}
+
+void GameUtil::renderBricks(Level& lvl) {
+
+	for (auto& row : lvl._brickList) {
+
+		for (auto& item : row) {
+
+			item.getResources()->getTexture()->render(item.x, item.y);
+		}
+	}
 }
 
