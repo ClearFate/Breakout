@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BrickType.cpp" />
+    <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="GameUtilityFunctions.cpp" />
     <ClCompile Include="main.cpp" />
@@ -157,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrickType.h" />
+    <ClInclude Include="GameEvents.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="GameUtilityFunctions.h" />
     <ClInclude Include="Tekstura.h" />

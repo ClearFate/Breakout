@@ -10,11 +10,13 @@ extern const int GAME_HEIGHT;
 class Level
 {
 public:
+	Level();
 	Level(int rowCount, int columnCount, int rowSpacing, int columnSpacing, std::string backgroundPath);
 	void destroyLevel();
 	void addResource(brickResources* res);
 	brickResources* findMatchingResourceById(std::string id);
 
+	Tekstura _background = Tekstura();
 	vector < vector<BrickType> > _brickList; //bricks on the level
 
 	int getRowCount();
@@ -28,7 +30,7 @@ private:
 	int _rowSpacing = 1;
 	int _columnSpacing = 1;
 	vector<brickResources*> _resources;  // level holds reference to every texture/sound needed to build level just once
-	Tekstura _background = Tekstura();
+	
 
 	
 

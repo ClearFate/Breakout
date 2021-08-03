@@ -3,7 +3,7 @@
     ColumnCount="14"   
     RowSpacing="5"  
     ColumnSpacing="5"  
-    BackgroundTexture="images/3hp.png">  
+    BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
@@ -48,12 +48,12 @@
     ColumnCount="15"   
     RowSpacing="3"  
     ColumnSpacing="3"  
-    BackgroundTexture="images/unbreakable.png">  
+    BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
             Id="S"   
-            Texture="images/unbreakable.png"   
+            Texture="images/1hp.png"   
             HitPoints="1"   
             HitSound="Sounds/Hit_01.wav"  
             BreakSound="Sounds/break01.ogg"  
@@ -61,7 +61,7 @@
         <!-- Medium Brick -->  
         <BrickType  
             Id="M"   
-            Texture="images/unbreakable.png"   
+            Texture="images/2hp.png"   
             HitPoints="2"   
             HitSound="Sounds/Hit_01.wav"  
             BreakSound="Sounds/break01.ogg"  
@@ -69,7 +69,7 @@
         <!-- Hard Brick -->  
         <BrickType   
             Id="H"   
-            Texture="images/unbreakable.png"   
+            Texture="images/3hp.png"   
             HitPoints="3"   
             HitSound="Sounds/Hit_01.wav"   
             BreakSound="Sounds/break01.ogg"  
@@ -93,12 +93,12 @@
     ColumnCount="13"   
     RowSpacing="3"  
     ColumnSpacing="3"  
-    BackgroundTexture="images/unbreakable.png">  
+    BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
         <BrickType  
             Id="S"   
-            Texture="images/unbreakable.png"   
+            Texture="images/1hp.png"   
             HitPoints="1"   
             HitSound="Sounds/Hit_01.wav"  
             BreakSound="Sounds/Hit_01.wav"  
@@ -106,7 +106,7 @@
         <!-- Medium Brick -->  
         <BrickType  
             Id="M"   
-            Texture="images/unbreakable.png"   
+            Texture="images/2hp.png"   
             HitPoints="2"   
             HitSound="Sounds/Hit_01.wav"  
             BreakSound="Sounds/break01.ogg"  
@@ -114,7 +114,7 @@
         <!-- Hard Brick -->  
         <BrickType   
             Id="H"   
-            Texture="images/unbreakable.png"   
+            Texture="images/3hp.png"   
             HitPoints="3"   
             HitSound="Sounds/hit02.ogg"   
             BreakSound="Sounds/break01.ogg"  

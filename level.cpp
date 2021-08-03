@@ -1,6 +1,11 @@
 #include "level.h"
 
 
+Level::Level()
+{
+	
+}
+
 Level::Level(int rowCount, int columnCount, int rowSpacing, int columnSpacing, std::string backgroundPath)
 {
 	_rowCount = rowCount;

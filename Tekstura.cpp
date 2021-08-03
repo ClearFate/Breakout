@@ -1,9 +1,5 @@
 #include "Tekstura.h"
 
-Tekstura::~Tekstura() {
-    free();
-}
-
 void Tekstura::render(int x, int y, SDL_Rect* Clip, double kut, SDL_Point* centar, SDL_RendererFlip zrcaljenje) {
 
     SDL_Rect odrediste{ x, y, _width, _height };
@@ -13,6 +9,30 @@ void Tekstura::render(int x, int y, SDL_Rect* Clip, double kut, SDL_Point* centa
         odrediste.h = Clip->h;
     }
     SDL_RenderCopyEx(gameRenderer, _texture, Clip, &odrediste, kut, centar, zrcaljenje);
+}
+
+bool Tekstura::loadFromFile(std::string putanja) {
+    free(); // JAKO BITNO , OSLOBODI PRETHODNU TEKSTURU UKOLIKO POSTOJI
+
+    SDL_Surface* ucitanaPodloga = IMG_Load(putanja.c_str());
+    if (ucitanaPodloga == NULL) {
+        printf("Metoda LoadFromFile - GRESKA: %s\n", IMG_GetError());
+    }
+    else {
+        // SDL_SetColorKey();
+        _texture = SDL_CreateTextureFromSurface(gameRenderer, ucitanaPodloga);
+        if (_texture == NULL) {
+            printf("Greska pretvorbe surface-a u teksturu!\n");
+        }
+        else {
+            _width = ucitanaPodloga->w;
+            _height = ucitanaPodloga->h;
+        }
+
+        SDL_FreeSurface(ucitanaPodloga);
+    }
+
+    return (_texture != NULL);
 }
 
 bool Tekstura::loadScaledFromFile(std::string putanja, int duzina, int visina) {

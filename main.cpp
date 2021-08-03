@@ -1,4 +1,5 @@
 #include "GameUtilityFunctions.h"
+#include "GameEvents.h"
 
 //global game context
 const int GAME_WIDTH = 1366;
@@ -12,7 +13,9 @@ vector<Level> gameLevelList;
 Tekstura gameBall = Tekstura();
 Tekstura gamePad = Tekstura();
 //------------------------------------------------------------
-
+bool gameIsRunning = true;
+SDL_Event event;
+Level currentGameLevel;
 
 
 int main(int argc, char* argv[]) {
@@ -26,17 +29,29 @@ int main(int argc, char* argv[]) {
 		//return -1;
 	}
 	GameUtil::loadGameFont();
-
+	GameUtil::loadGamePadAndBall(GAME_WIDTH / 15, 17, 20);
 	GameUtil::loadLevel("levelsXML.xml");
 
+	currentGameLevel = gameLevelList[0];
 
+	while(gameIsRunning){  //game loop
 	
-	//Clear screen
+		while (SDL_PollEvent(&event)) {  // event loop
+			
+			if (event.type == SDL_QUIT) {  // pritisak na x ili ALT+F4
+				gameIsRunning = false;
+			}
+
+			EventUtil::handleGameEvents(event);
+
+		}
+	
+	// refresh renderer
 	SDL_RenderClear(gameRenderer);
 
-	//Render texture to screen
-	//SDL_RenderCopy(gameRenderer, gameTexture, NULL, NULL);
-	GameUtil::renderBricks(gameLevelList[0]);
+	// update position of resouces on the screen
+	currentGameLevel._background.render(0, 0);
+	GameUtil::renderBricks(currentGameLevel);
 	gameBall.render(500, 500);
 	gamePad.render(GAME_WIDTH / 2, GAME_HEIGHT - 50);
 
@@ -44,9 +59,8 @@ int main(int argc, char* argv[]) {
 	SDL_RenderPresent(gameRenderer);
 
 
-	
+	}
 
-	getchar();
 	for (auto& lvl : gameLevelList) {
 		lvl.destroyLevel();
 	}

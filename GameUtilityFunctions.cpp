@@ -163,7 +163,6 @@ bool GameUtil::loadLevel(string XMLpath)
 
 			//SDL LOAD MEDIA RESOURCES PART
 			brickResources* newBrickResource = new brickResources(newBrickId, newHitPoints, newBreakScore, newIsBreakable, newBrickTexturePath, brickWidth, brickHeight, newBrickHitSoundPath, newBrickBreakSoundPath);  // allocated on heap
-			loadGamePadAndBall(brickWidth*1.5, brickHeight/1.2, 20);
 
 			newLevel.addResource(newBrickResource);
 			//------------------------------------------
@@ -175,7 +174,7 @@ bool GameUtil::loadLevel(string XMLpath)
 		gameLevelList.push_back(newLevel);
 		levelData = levelData->NextSiblingElement("Level");
 	}
-
+	return true;
 }
 
 void GameUtil::close()
@@ -260,4 +259,5 @@ void GameUtil::renderBricks(Level& lvl) {
 		}
 	}
 }
+
 
