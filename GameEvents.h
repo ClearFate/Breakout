@@ -1,11 +1,15 @@
 #pragma once
 #include <SDL.h>
+#include "Level.h"
 
 extern SDL_Window* gameWindow;
 extern SDL_Renderer* gameRenderer;
 
+extern vector<Level> gameLevelList;
+extern Level currentGameLevel;
+
 namespace EventUtil {
 
-	void handleGameEvents(SDL_Event& e);
+	void handleUserInput(SDL_Event& e);
 }
 

@@ -1,12 +1,13 @@
 #include "GameEvents.h"
 
-void EventUtil::handleGameEvents(SDL_Event& e) {
-    if (e.window.type == SDL_WINDOWEVENT) {
-        switch (e.window.event) {
+void EventUtil::handleUserInput(SDL_Event& e) {
+    if (e.type == SDL_KEYDOWN) {
+        switch (e.key.keysym.sym) {
 
-        /*case SDL_WINDOWEVENT_EXPOSED:
+        case SDLK_RIGHT:
+            currentGameLevel = gameLevelList[1];
             SDL_RenderPresent(gameRenderer);
-            break;*/
+            break;
 
 
         }

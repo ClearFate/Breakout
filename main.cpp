@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 				gameIsRunning = false;
 			}
 
-			EventUtil::handleGameEvents(event);
+			EventUtil::handleUserInput(event);
 
 		}
 	
