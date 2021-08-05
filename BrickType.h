@@ -34,13 +34,13 @@ class BrickType
 public:
 	BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource);
 	brickResources* loseHP(); //when hit by ball change resources accordingly to number of hp left
+	void updateCollisionBox();
 
 	brickResources* getResources();
 
 	int x = 0; //position on the lvl
-	int xEnd = 0; // for collision box
 	int y = 0; //position on the lvl
-	int yEnd = 0; // for collision box
+	SDL_Rect _collisionBox;
 
 private:
 	std::string _ID = "_";

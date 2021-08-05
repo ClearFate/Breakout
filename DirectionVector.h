@@ -1,9 +1,11 @@
 #pragma once
+#include "GameUtilityFunctions.h"
+
 class DirectionVector
 {
 public:
 
-	void perfectBounce();
+	void perfectBounce(Side pointOfContact);
 	void setUpDirection(double upVelocity);
 	void setRightDirection(double rightVelocity);
 

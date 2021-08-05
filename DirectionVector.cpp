@@ -2,10 +2,15 @@
 #include <cmath>
 #include <iostream>
 
-void DirectionVector::perfectBounce()
+void DirectionVector::perfectBounce(Side pointOfContact)
 {
-	upDirection = -upDirection;
-	rightDirection = -rightDirection;
+	if (pointOfContact == Side::UP || pointOfContact == Side::DOWN){
+		upDirection = -upDirection;
+	}
+	else {
+		rightDirection = -rightDirection;
+	}
+	
 	normalize();
 }
 

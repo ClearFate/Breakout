@@ -10,6 +10,11 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 	_brick = resource;
 }
 
+void BrickType::updateCollisionBox()
+{
+	_collisionBox = { x,y, x + _brick->getTexture()->getWidth(), y + _brick->getTexture()->getHeight() };
+}
+
 brickResources* BrickType::getResources()
 {
 	return _brick;

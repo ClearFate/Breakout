@@ -49,6 +49,58 @@ bool GameUtil::checkCollision(SDL_Rect a, SDL_Rect b) {
 }
 
 
+Side GameUtil::returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox) {
+	int brickLEFT, ballLEFT;
+	int brickRIGHT, ballRIGHT;
+	int brickTOP, ballTOP;
+	int brickBOTTOM, ballBOTTOM;
+
+	brickLEFT = brickBox.x;
+	brickRIGHT = brickBox.x + brickBox.w;
+	brickTOP = brickBox.y;
+	brickBOTTOM = brickBox.y + brickBox.h;
+
+	ballLEFT = ballBox.x;
+	ballRIGHT = ballBox.x + ballBox.w;
+	ballTOP = ballBox.y;
+	ballBOTTOM = ballBox.y + ballBox.h;
+	
+	Side upOrDownSide;
+	Side leftOrRightSide;
+
+	// defining possible sides the ball can hit the brick on (either right or left side) or (bottom and upper side)
+	if ( ballLEFT < brickLEFT )
+		leftOrRightSide = Side::LEFT;
+	else
+		leftOrRightSide = Side::RIGHT;
+
+	if ( ballTOP < brickTOP )
+		upOrDownSide = Side::UP;
+	else
+		upOrDownSide = Side::DOWN;
+
+	//
+	double leftRightDistance = 3000;
+	double upDownDistance = 3000;
+
+	if (leftOrRightSide == Side::RIGHT)  //lopta je desno od bricka
+		leftRightDistance = abs(ballLEFT - brickRIGHT);
+	else
+		leftRightDistance = abs(ballRIGHT - brickLEFT);
+
+	if (upOrDownSide == Side::UP)  //lopta je iznad bricka
+		upDownDistance = abs(ballBOTTOM - brickTOP);
+	else
+		upDownDistance = abs(ballTOP - brickBOTTOM);
+
+	if (upDownDistance < leftRightDistance)
+		return upOrDownSide;
+	else
+		return leftOrRightSide;
+
+}
+
+
 void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string levelLayout, std::string delimiter) {
 	int rowCount = lvl.getRowCount();
 	int columnCount = lvl.getColumnCount();
@@ -82,6 +134,7 @@ void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string l
 			BrickType newBrick = BrickType(foundRes->getId(), foundRes->getHitpoints(), foundRes->getBreakScore(), foundRes->getIsBreakable(), foundRes);
 			newBrick.x = x;
 			newBrick.y = y;
+			newBrick.updateCollisionBox();
 
 			brickRow.push_back(newBrick);
 

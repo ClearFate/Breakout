@@ -17,6 +17,13 @@ extern SDL_Window* gameWindow;
 extern SDL_Renderer* gameRenderer;
 extern Tekstura gamePad;
 
+enum class Side {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+};
+
 namespace GameUtil {
 
 	bool init(std::string nazivIgre);
@@ -25,6 +32,7 @@ namespace GameUtil {
 	bool loadLevel(std::string XMLpath);
 	void renderBricks(Level& lvl);
 	bool checkCollision(SDL_Rect a, SDL_Rect b);
+	Side returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox);
 	void close();
 	
 }

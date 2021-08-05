@@ -1,4 +1,5 @@
 #include "GameEvents.h"
+#include "GameUtilityFunctions.h"
 
 void EventUtil::handlePlayerInput(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {  // we only care about first DOWN PRESS OF A KEY (when holding a key SDL reports it as multiple presses of same key)
@@ -48,4 +49,16 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
 
 void EventUtil::handleGameEvents(SDL_Event& e)
 {
+    for (auto& row : currentGameLevel._brickList) {
+
+        for (auto& brick : row) {
+            
+            if (GameUtil::checkCollision(gameBall._collisionBox, brick._collisionBox)) {
+                Side pointOfContact = GameUtil::returnSideOfCollision(brick._collisionBox, gameBall._collisionBox);
+                
+                gameBall.getDirectionVector().perfectBounce(pointOfContact);
+            }
+    }}
+
 }
+
