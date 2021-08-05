@@ -12,7 +12,7 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 
 void BrickType::updateCollisionBox()
 {
-	_collisionBox = { x,y, x + _brick->getTexture()->getWidth(), y + _brick->getTexture()->getHeight() };
+	_collisionBox = { x,y, _brick->getTexture()->getWidth(), _brick->getTexture()->getHeight() };
 }
 
 brickResources* BrickType::getResources()

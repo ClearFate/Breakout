@@ -359,10 +359,9 @@ void GameUtil::showBrickCollisionBoxes() {
 		for (auto& brick : row) {
 			SDL_RenderDrawRect(gameRenderer, &brick._collisionBox);
 		}
-
-		//put it back to white color
-		SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
 	}
+	//put it back to white color
+	SDL_SetRenderDrawColor(gameRenderer, 255, 255, 255, 255);
 }
 
 void GameUtil::showBallAndPadCollisionBoxes() {

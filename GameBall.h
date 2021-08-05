@@ -10,8 +10,8 @@ class GameBall
 public:
 	int _x = 0; 
 	int _y = 0;
-	double _ballSpeed;
-	SDL_Rect _collisionBox;
+	double _ballSpeed = 700;
+	SDL_Rect _collisionBox = { 0,0,0,0 };
 
 	GameBall();
 	GameBall(int x, int y, double upDirection, double rightDirection, double ballSpeed, std::string texturePath);
@@ -26,7 +26,7 @@ private:
 	int _width = 0;  // i can find it out through tekstura class but just for convenience I put it here too
 	int _height = 0;
 
-	Tekstura _ballTexture = Tekstura();
+	Tekstura _ballTexture;
 	DirectionVector _direction;
 };
 

@@ -20,7 +20,7 @@ GameBall::GameBall(int x, int y, double upDirection, double rightDirection, doub
         _height = _ballTexture.getHeight();
     }
 
-    _collisionBox = { x, y, x + _width, y + _height };
+    _collisionBox = { _x, _y, _width, _height };
 }
 
 
@@ -35,7 +35,8 @@ void GameBall::move(double deltaTime)  // deltaTime for frame rate independant m
 
     //printf("R: %d  U: %d  SPD %lf  D %lf\n", rDiff, uDiff, _ballSpeed, deltaTime);
 
-    _collisionBox = { _x, _y, _x + _width, _y + _height };
+    _collisionBox = { _x, _y, _width,  _height };
+
 }
 
 int GameBall::getWidth()
