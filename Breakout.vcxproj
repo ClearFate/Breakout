@@ -151,7 +151,6 @@
     <ClCompile Include="BrickType.cpp" />
     <ClCompile Include="GameBall.cpp" />
     <ClCompile Include="GameEvents.cpp" />
-    <ClCompile Include="GamePad.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="GameUtilityFunctions.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="BrickType.h" />
     <ClInclude Include="GameBall.h" />
     <ClInclude Include="GameEvents.h" />
-    <ClInclude Include="GamePad.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="GameUtilityFunctions.h" />
     <ClInclude Include="GameTimer.h" />

@@ -14,6 +14,6 @@ extern GameBall gameBall;
 namespace EventUtil {
 
 	void handlePlayerInput(SDL_Event& e);
-	void handleGameEvents(SDL_Event& e);
+	void handleGameEvents();
 }
 

@@ -1,5 +1,9 @@
 #include "GameBall.h"
 
+GameBall::GameBall() {
+    // do fucking nothing
+}
+
 GameBall::GameBall(int x, int y, double upDirection, double rightDirection, double ballSpeed, std::string ballTexturePath)
 {
     _x = x;
@@ -19,9 +23,6 @@ GameBall::GameBall(int x, int y, double upDirection, double rightDirection, doub
     _collisionBox = { x, y, x + _width, y + _height };
 }
 
-GameBall::GameBall()
-{
-}
 
 void GameBall::move(double deltaTime)  // deltaTime for frame rate independant movement (if game is capped on only one frame rate then it's not needed but I put it anyway)
 {

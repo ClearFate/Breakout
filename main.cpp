@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 			}
 
 			EventUtil::handlePlayerInput(event);
-			EventUtil::handleGameEvents(event);
+			EventUtil::handleGameEvents();
 
 		}  // END OF EVENT LOOP
 	
@@ -70,6 +70,9 @@ int main(int argc, char* argv[]) {
 	GameUtil::renderBricks(currentGameLevel);
 	gameBall.getTexture().render(gameBall._x, gameBall._y);
 	gamePad.render(GAME_WIDTH / 2, GAME_HEIGHT - 50);
+
+	GameUtil::showBrickCollisionBoxes();
+	GameUtil::showBallAndPadCollisionBoxes();
 
 	//Update screen
 	SDL_RenderPresent(gameRenderer);

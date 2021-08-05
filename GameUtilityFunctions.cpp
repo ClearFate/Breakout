@@ -350,4 +350,30 @@ void GameUtil::renderBricks(Level& lvl) {
 	}
 }
 
+void GameUtil::showBrickCollisionBoxes() {
+	// set color for drawing rect collisionBox
+	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 255, 100);
+
+	for (auto& row : currentGameLevel._brickList) {
+
+		for (auto& brick : row) {
+			SDL_RenderDrawRect(gameRenderer, &brick._collisionBox);
+		}
+
+		//put it back to white color
+		SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
+	}
+}
+
+void GameUtil::showBallAndPadCollisionBoxes() {
+	// set color for drawing rect collisionBox
+	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 255, 100);
+
+	SDL_RenderDrawRect(gameRenderer, &gameBall._collisionBox);
+
+	//put it back to white color
+	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
+}
+
+
 

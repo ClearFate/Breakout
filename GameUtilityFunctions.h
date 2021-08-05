@@ -7,6 +7,7 @@
 #include <SDL_ttf.h>
 #include "tinyxml2.h"
 #include "level.h"
+#include "GameBall.h"
 
 extern const int GAME_WIDTH;
 extern const int GAME_HEIGHT;
@@ -16,13 +17,8 @@ extern TTF_Font* gameFont;
 extern SDL_Window* gameWindow;
 extern SDL_Renderer* gameRenderer;
 extern Tekstura gamePad;
-
-enum class Side {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN
-};
+extern Level currentGameLevel;
+extern GameBall gameBall;
 
 namespace GameUtil {
 
@@ -33,6 +29,8 @@ namespace GameUtil {
 	void renderBricks(Level& lvl);
 	bool checkCollision(SDL_Rect a, SDL_Rect b);
 	Side returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox);
+	void showBrickCollisionBoxes();
+	void showBallAndPadCollisionBoxes();
 	void close();
 	
 }

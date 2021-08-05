@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_LEVEL_H
+#define GAME_LEVEL_H
+
 #include "Tekstura.h"
 #include "BrickType.h"
 #include <vector>
@@ -30,10 +32,9 @@ private:
 	int _rowSpacing = 1;
 	int _columnSpacing = 1;
 	vector<brickResources*> _resources;  // level holds reference to every texture/sound needed to build level just once
-	
 
-	
-
-	
 };
+
+
+#endif
 

@@ -47,16 +47,20 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
     }
 }
 
-void EventUtil::handleGameEvents(SDL_Event& e)
+void EventUtil::handleGameEvents()
 {
     for (auto& row : currentGameLevel._brickList) {
 
         for (auto& brick : row) {
-            
+
             if (GameUtil::checkCollision(gameBall._collisionBox, brick._collisionBox)) {
                 Side pointOfContact = GameUtil::returnSideOfCollision(brick._collisionBox, gameBall._collisionBox);
                 
                 gameBall.getDirectionVector().perfectBounce(pointOfContact);
+
+                if (pointOfContact == Side::UP){
+
+                }
             }
     }}
 

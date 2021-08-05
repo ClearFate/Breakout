@@ -1,5 +1,11 @@
 #pragma once
-#include "GameUtilityFunctions.h"
+
+enum class Side {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+};
 
 class DirectionVector
 {
