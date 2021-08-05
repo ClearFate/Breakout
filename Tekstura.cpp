@@ -132,11 +132,11 @@ void Tekstura::setAlpha(Uint8 alpha) {
     SDL_SetTextureAlphaMod(_texture, alpha);
 }
 
-int Tekstura::getDuzina() {
+int Tekstura::getWidth() {
     return _width;
 }
 
-int Tekstura::getVisina() {
+int Tekstura::getHeight() {
     return _height;
 }
 

@@ -21,8 +21,8 @@ public:
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
 	void setBlendMode(SDL_BlendMode mode);
 	void setAlpha(Uint8 alpha);
-	int getDuzina();
-	int getVisina();
+	int getWidth();
+	int getHeight();
 
 	void free(); // oslobodjenje zauzetih resursa 
 

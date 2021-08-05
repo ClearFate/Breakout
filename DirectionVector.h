@@ -4,14 +4,18 @@ class DirectionVector
 public:
 
 	void perfectBounce();
-	void setDirection(double upVelocity, double rightVelocity);
+	void setUpDirection(double upVelocity);
+	void setRightDirection(double rightVelocity);
 
 	double getUpUnitVector();
 	double getRightUnitVector();
 
 private:
-	double upDirection = 0;     // unit vector, if -1 it's down  
-	double rightDirection = 0;  // unit vector, if -1 it's left
+	double upDirection = 0;     //  if -1 it's down  
+	double rightDirection = 0;  //  if -1 it's left
+
+	double moveUp = 0;     // unit vector of current movement direction
+	double moveRight = 0;  // here so the information about original direction where ball is heading is retained in up and right Direction
 
 	void normalize();
 
