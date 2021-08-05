@@ -35,12 +35,12 @@ int main(int argc, char* argv[]) {
 	}
 	GameUtil::loadGameFont();
 	GameUtil::loadLevel("levelsXML.xml");
-
-	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 0, 0, 200, "images/ball2.png");
+	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 200, "images/ball2.png");
 	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 300, "images/pad.png");
 	
 
 	currentGameLevel = gameLevelList[0];
+
 	GameTimer fpsTimer;
 	GameTimer deltaTimeTimer;
 	
@@ -55,11 +55,9 @@ int main(int argc, char* argv[]) {
 			}
 
 			EventUtil::handlePlayerInput(event);
-			EventUtil::handleGameEvents();
-
 		}  // END OF EVENT LOOP
 	
-
+		EventUtil::handleGameEvents();
 	// EXECUTE GAME LOGIC
 		gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
 		gamePad.move(deltaTimeTimer.GetTicks() / 1000.);

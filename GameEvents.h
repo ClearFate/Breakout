@@ -4,6 +4,7 @@
 #include "GameBall.h"
 #include "GamePad.h"
 
+extern bool gameIsRunning;
 extern SDL_Window* gameWindow;
 extern SDL_Renderer* gameRenderer;
 

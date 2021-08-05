@@ -93,7 +93,7 @@ Side GameUtil::returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox) {
 	else
 		upDownDistance = abs(ballTOP - brickBOTTOM);
 
-	if (upDownDistance < leftRightDistance)
+	if (upDownDistance < leftRightDistance) // if they're equal the upDownSide is returned which is prefered
 		return upOrDownSide;
 	else
 		return leftOrRightSide;
@@ -358,6 +358,7 @@ void GameUtil::showBallAndPadCollisionBoxes() {
 	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 255, 100);
 
 	SDL_RenderDrawRect(gameRenderer, &gameBall._collisionBox);
+	SDL_RenderDrawRect(gameRenderer, &gamePad._collisionBox);
 
 	//put it back to white color
 	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
