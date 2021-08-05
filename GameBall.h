@@ -8,17 +8,17 @@ extern const int GAME_HEIGHT;
 class GameBall
 {
 public:
-	int _x = 0; 
-	int _y = 0;
+	int x = 0; 
+	int y = 0;
 	double _ballSpeed = 700;
 	SDL_Rect _collisionBox = { 0,0,0,0 };
 
 	GameBall();
 	GameBall(int x, int y, double upDirection, double rightDirection, double ballSpeed, std::string texturePath);
-	void move(double deltaTime);  // to pass delta time calculate how 
+	void move(double deltaTime);  
 
-	int getWidth();
-	int getHeight();
+	//int getWidth();
+	//int getHeight();
 	DirectionVector& getDirectionVector();
 	Tekstura getTexture();
 

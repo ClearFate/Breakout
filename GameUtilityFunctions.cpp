@@ -155,17 +155,6 @@ bool GameUtil::loadGameFont() {
 	return gameFont != NULL;
 }
 
-bool GameUtil::loadGamePad(int padWidth, int padHeight) {
-	bool uspjelo = true;
-	
-	if (!gamePad.loadScaledFromFile("images/pad.png", padWidth, padHeight)) {
-		printf("Failed to load gameBall texture \"%s\" !\n", "images/pad.png");
-		uspjelo = false;
-	}
-		
-	return uspjelo;
-}
-
 const char* extractAttribute(XMLElement* element, const char* attr) {  // helper func to avoid errors when extracting xml
 	const char* result = element->Attribute(attr);
 	if (result != nullptr) {

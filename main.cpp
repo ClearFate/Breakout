@@ -2,6 +2,7 @@
 #include "GameEvents.h"
 #include "GameBall.h"
 #include "GameTimer.h"
+#include "GamePad.h"
 
 
 //global game context
@@ -19,7 +20,7 @@ SDL_Renderer* gameRenderer = NULL;
 
 vector<Level> gameLevelList;
 GameBall gameBall;  // loading of textures you can do only after you've initialized SDL subsystems
-Tekstura gamePad;
+GamePad gamePad;
 //------------------------------------------------------------
 bool gameIsRunning = true;
 SDL_Event event;
@@ -33,9 +34,11 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	GameUtil::loadGameFont();
-	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getWidth()/2, GAME_HEIGHT / 2 - gameBall.getHeight() / 2, 0, 0, 200, "images/ball2.png");
-	GameUtil::loadGamePad(GAME_WIDTH / 15, 17);
 	GameUtil::loadLevel("levelsXML.xml");
+
+	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 0, 0, 200, "images/ball2.png");
+	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 300, "images/pad.png");
+	
 
 	currentGameLevel = gameLevelList[0];
 	GameTimer fpsTimer;
@@ -59,7 +62,9 @@ int main(int argc, char* argv[]) {
 
 	// EXECUTE GAME LOGIC
 		gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
-		deltaTimeTimer.Start();
+		gamePad.move(deltaTimeTimer.GetTicks() / 1000.);
+
+		deltaTimeTimer.Start();  // this timer goes right after move calls
 
 
 	// RENDER TO THE SCREEN
@@ -68,8 +73,8 @@ int main(int argc, char* argv[]) {
 	// update position of resouces on the screen
 	currentGameLevel._background.render(0, 0);
 	GameUtil::renderBricks(currentGameLevel);
-	gameBall.getTexture().render(gameBall._x, gameBall._y);
-	gamePad.render(GAME_WIDTH / 2, GAME_HEIGHT - 50);
+	gameBall.getTexture().render(gameBall.x, gameBall.y);
+	gamePad.getTexture().render(gamePad.x, gamePad.y);
 
 	GameUtil::showBrickCollisionBoxes();
 	GameUtil::showBallAndPadCollisionBoxes();

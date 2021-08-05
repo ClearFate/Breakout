@@ -1,13 +1,13 @@
 #include "GameBall.h"
 
 GameBall::GameBall() {
-    // do fucking nothing
+
 }
 
-GameBall::GameBall(int x, int y, double upDirection, double rightDirection, double ballSpeed, std::string ballTexturePath)
+GameBall::GameBall(int newX, int newY, double upDirection, double rightDirection, double ballSpeed, std::string ballTexturePath)
 {
-    _x = x;
-    _y = y;
+    x = newX;
+    y = newY;
     _ballSpeed = ballSpeed;
     _direction.setRightDirection(rightDirection);
     _direction.setUpDirection(upDirection);
@@ -20,34 +20,33 @@ GameBall::GameBall(int x, int y, double upDirection, double rightDirection, doub
         _height = _ballTexture.getHeight();
     }
 
-    _collisionBox = { _x, _y, _width, _height };
+    _collisionBox = { x, y, _width, _height };
 }
 
 
 void GameBall::move(double deltaTime)  // deltaTime for frame rate independant movement (if game is capped on only one frame rate then it's not needed but I put it anyway)
 {
-    // update position of ball and it's collider to new coordinates
-    int rDiff = _direction.getRightUnitVector() * _ballSpeed * deltaTime;
-    int uDiff = _direction.getUpUnitVector() * _ballSpeed * deltaTime;
-    
-    _x = _x + rDiff;
-    _y = _y + uDiff;
+    // update position of ball and it's collider to new coordinates   
+    x += int(_direction.getRightUnitVector() * _ballSpeed * deltaTime);
+    y += int(_direction.getUpUnitVector() * _ballSpeed * deltaTime);
 
     //printf("R: %d  U: %d  SPD %lf  D %lf\n", rDiff, uDiff, _ballSpeed, deltaTime);
 
-    _collisionBox = { _x, _y, _width,  _height };
+    //update x and y of collisionBox to new values 
+    _collisionBox.x = x;
+    _collisionBox.y = y;
 
 }
 
-int GameBall::getWidth()
-{
-    return _width;
-}
-
-int GameBall::getHeight()
-{
-    return _height;
-}
+//int GameBall::getWidth()
+//{
+//    return _width;
+//}
+//
+//int GameBall::getHeight()
+//{
+//    return _height;
+//}
 
 DirectionVector& GameBall::getDirectionVector()
 {
