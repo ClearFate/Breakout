@@ -4,15 +4,50 @@
 using namespace tinyxml2;
 using namespace std;
 
-const char* extractAttribute(XMLElement* element, const char* attr) {  // helper func to avoid errors when extracting xml
-	const char* result = element->Attribute(attr);
-	if (result != nullptr){
-		return result;
+bool GameUtil::checkCollision(SDL_Rect a, SDL_Rect b) {
+
+	int leftA, leftB;
+	int rightA, rightB;
+	int topA, topB;
+	int bottomA, bottomB;
+
+	//Calculate the sides of rect A
+	leftA = a.x;
+	rightA = a.x + a.w;
+	topA = a.y;
+	bottomA = a.y + a.h;
+
+	//Calculate the sides of rect B
+	leftB = b.x;
+	rightB = b.x + b.w;
+	topB = b.y;
+	bottomB = b.y + b.h;
+
+	//check for collision
+	if (bottomA <= topB)
+	{
+		return false;
 	}
-	else {
-		return "";
+
+	if (topA >= bottomB)
+	{
+		return false;
 	}
+
+	if (rightA <= leftB)
+	{
+		return false;
+	}
+
+	if (leftA >= rightB)
+	{
+		return false;
+	}
+
+	//If none of the sides from A are outside B
+	return true;
 }
+
 
 void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string levelLayout, std::string delimiter) {
 	int rowCount = lvl.getRowCount();
@@ -57,8 +92,6 @@ void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string l
 		y += brickHeight;
 		x = 0;
 	}
-	
-
 }
 
 bool GameUtil::loadGameFont() {
@@ -69,13 +102,8 @@ bool GameUtil::loadGameFont() {
 	return gameFont != NULL;
 }
 
-bool GameUtil::loadGamePadAndBall(int padWidth, int padHeight, int ballHeightAndWidth) {
+bool GameUtil::loadGamePad(int padWidth, int padHeight) {
 	bool uspjelo = true;
-
-	if (!gameBall.loadScaledFromFile("images/ball2.png", ballHeightAndWidth, ballHeightAndWidth)) {
-		printf("Failed to load gameBall texture \"%s\" !\n", "images/ball.png");
-		uspjelo = false;
-	}
 	
 	if (!gamePad.loadScaledFromFile("images/pad.png", padWidth, padHeight)) {
 		printf("Failed to load gameBall texture \"%s\" !\n", "images/pad.png");
@@ -85,6 +113,15 @@ bool GameUtil::loadGamePadAndBall(int padWidth, int padHeight, int ballHeightAnd
 	return uspjelo;
 }
 
+const char* extractAttribute(XMLElement* element, const char* attr) {  // helper func to avoid errors when extracting xml
+	const char* result = element->Attribute(attr);
+	if (result != nullptr) {
+		return result;
+	}
+	else {
+		return "";
+	}
+}
 
 bool GameUtil::loadLevel(string XMLpath)  
 {

@@ -10,6 +10,6 @@ extern Level currentGameLevel;
 
 namespace EventUtil {
 
-	void handleUserInput(SDL_Event& e);
+	void handlePlayerInput(SDL_Event& e);
 }
 

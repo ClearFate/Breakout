@@ -1,6 +1,6 @@
 #include "GameEvents.h"
 
-void EventUtil::handleUserInput(SDL_Event& e) {
+void EventUtil::handlePlayerInput(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN) {
         switch (e.key.keysym.sym) {
 

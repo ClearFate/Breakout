@@ -149,20 +149,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BrickType.cpp" />
+    <ClCompile Include="GameBall.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="GameUtilityFunctions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tekstura.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="DirectionVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrickType.h" />
+    <ClInclude Include="GameBall.h" />
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="GameUtilityFunctions.h" />
     <ClInclude Include="Tekstura.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="DirectionVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
