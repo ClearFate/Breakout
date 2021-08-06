@@ -17,6 +17,7 @@ public:
 	void destroyLevel();
 	void addResource(brickResources* res);
 	brickResources* findMatchingResourceById(std::string id);
+	brickResources* findBrickByHP(int health_left);
 
 	Tekstura _background = Tekstura();
 	vector < vector<BrickType> > _brickList; //bricks on the level

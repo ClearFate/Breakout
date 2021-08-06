@@ -26,7 +26,7 @@ namespace GameUtil {
 	bool init(std::string nazivIgre);
 	bool loadGameFont();
 	bool loadLevel(std::string XMLpath);
-	void renderBricks(Level& lvl);
+	bool renderBricks(Level& lvl);
 	bool checkCollision(SDL_Rect a, SDL_Rect b);
 	Side returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox);
 	void showBrickCollisionBoxes();

@@ -328,15 +328,21 @@ bool GameUtil::init(std::string nazivIgre) {
 	return uspjelo;
 }
 
-void GameUtil::renderBricks(Level& lvl) {
+bool GameUtil::renderBricks(Level& lvl) {
+	bool areThereBricksLeft = false;
 
 	for (auto& row : lvl._brickList) {
 
-		for (auto& item : row) {
+		for (auto& brick : row) {
+			if (!brick.IsKilled()) {
+				brick.getResources()->getTexture()->render(brick.x, brick.y);
 
-			item.getResources()->getTexture()->render(item.x, item.y);
+				if (brick.IsBreakable())
+					areThereBricksLeft = true;
+			}
 		}
 	}
+	return areThereBricksLeft;
 }
 
 void GameUtil::showBrickCollisionBoxes() {
@@ -346,7 +352,8 @@ void GameUtil::showBrickCollisionBoxes() {
 	for (auto& row : currentGameLevel._brickList) {
 
 		for (auto& brick : row) {
-			SDL_RenderDrawRect(gameRenderer, &brick._collisionBox);
+			if(!brick.IsKilled())
+				SDL_RenderDrawRect(gameRenderer, &brick._collisionBox);
 		}
 	}
 	//put it back to white color

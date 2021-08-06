@@ -50,6 +50,20 @@ brickResources* Level::findMatchingResourceById(std::string id)
 	return result;
 }
 
+brickResources* Level::findBrickByHP(int health_left)
+{
+	brickResources* result = nullptr;
+	for (auto& it : _resources) {
+
+		if (it->getHitpoints() == health_left) {
+			result = it;
+			break;
+		}
+	}
+
+	return result;
+}
+
 int Level::getRowCount()
 {
 	return _rowCount;

@@ -37,17 +37,17 @@
             HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
-        H H H H H H H H H H H H H H 
-        M I I M _ _ M M _ _ M I I M  
-        S S S S S S S S S S S S S S  
+        x x x x x x x x x x x x x x 
+        x x x x _ _ x x _ _ x x x x   
+        x x x x x x x x x x x x S x  
     </Bricks>    
 </Level>
 
 <Level   
     RowCount="4"   
-    ColumnCount="15"   
-    RowSpacing="3"  
-    ColumnSpacing="3"  
+    ColumnCount="8"   
+    RowSpacing="10"  
+    ColumnSpacing="10"  
     BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
@@ -82,17 +82,18 @@
             HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
-        H H H H H H H H H H H H H H H H H H H H  
-        M M I I M M _ _ M M M M _ _ M M I I M M  
-        M M S S M M S S M H H M _ S S S S S S S  
+        S x x x x x x x  
+        x x x x x x x M
+        x x x x x x x x
+        x x x x x x x x
     </Bricks>    
 </Level>
 
 <Level   
     RowCount="2"   
-    ColumnCount="13"   
-    RowSpacing="3"  
-    ColumnSpacing="3"  
+    ColumnCount="5"   
+    RowSpacing="20"  
+    ColumnSpacing="20"  
     BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
@@ -127,8 +128,7 @@
             HitSound="Sounds/break01.ogg" />  
     </BrickTypes>  
     <Bricks>  
-        H H H H H H H H H H H H H H H H H H H H  
-        M M I I M M _ _ M M M M _ _ M M I I M M  
-        M M I I M M I I M I I M I I S S I I S S  
+        x x x x x
+        H H x x x
     </Bricks>    
 </Level>

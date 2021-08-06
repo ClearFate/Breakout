@@ -35,14 +35,14 @@ int main(int argc, char* argv[]) {
 	}
 	GameUtil::loadGameFont();
 	GameUtil::loadLevel("levelsXML.xml");
-	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 200, "images/ball2.png");
-	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 300, "images/pad.png");
+	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 450, "images/ball2.png");
+	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 450, "images/pad.png");
 
-	currentGameLevel = gameLevelList[0];
+	int currLvlIndex = 0;
+	currentGameLevel = gameLevelList[currLvlIndex];
 
 	GameTimer fpsTimer;
 	GameTimer deltaTimeTimer;
-	
 
 	while(gameIsRunning){  //game loop
 		//fpsTimer.Start(); // timer starts here so move and frame cap function later get 
@@ -69,7 +69,17 @@ int main(int argc, char* argv[]) {
 
 	// update position of resouces on the screen
 	currentGameLevel._background.render(0, 0);
-	GameUtil::renderBricks(currentGameLevel);
+	
+	if (!GameUtil::renderBricks(currentGameLevel)) {
+		if (currLvlIndex+1 >= gameLevelList.size()) {  // if there are no more lvls to switch to - player wins
+			SDL_Delay(2000);
+			gameIsRunning = false;
+		}
+		else {
+			currentGameLevel = gameLevelList[++currLvlIndex];
+		}
+	}
+
 	gameBall.getTexture().render(gameBall.x, gameBall.y);
 	gamePad.getTexture().render(gamePad.x, gamePad.y);
 

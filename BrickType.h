@@ -36,6 +36,12 @@ public:
 	brickResources* loseHP(); //when hit by ball change resources accordingly to number of hp left
 	void updateCollisionBox();
 
+	int getIndex();
+	int getHitpoints();
+	int getBreakScore();
+	bool IsBreakable();
+	bool IsKilled();
+	bool changeResource(brickResources* res);
 	brickResources* getResources();
 
 	int x = 0; //position on the lvl
@@ -43,11 +49,11 @@ public:
 	SDL_Rect _collisionBox;
 
 private:
-	int _rbr = 0;
-	static int _rbr_counter;
+	int _index = 0;
+	static int index_counter_sequence;
 
 	std::string _ID = "_";
-	int _hitpoints = 1;
+	int _hitpoints = 0;
 	int _breakScore = 1;
 	bool _isBreakable = true;
 

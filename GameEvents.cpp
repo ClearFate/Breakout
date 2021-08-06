@@ -48,31 +48,40 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
 }
 
 void handleCollision_BricksAndBall() {
+    
+
     for (auto& row : currentGameLevel._brickList) {
 
         for (auto& brick : row) {
 
-            if (GameUtil::checkCollision(gameBall._collisionBox, brick._collisionBox)) {
-                Side pointOfContact = GameUtil::returnSideOfCollision(brick._collisionBox, gameBall._collisionBox);
+            if (!brick.IsKilled()) {
+                if (GameUtil::checkCollision(gameBall._collisionBox, brick._collisionBox)) {
+                    if (brick.IsBreakable())
+                        brick.loseHP();
+                        brickResources* newRes = currentGameLevel.findBrickByHP(brick.getHitpoints());
+                        brick.changeResource(newRes);
 
-                gameBall.getDirectionVector().perfectBounce(pointOfContact);
+                    // additional checks to determine how to bounce the ball off off the brick
+                    Side pointOfContact = GameUtil::returnSideOfCollision(brick._collisionBox, gameBall._collisionBox);
+                    gameBall.getDirectionVector().perfectBounce(pointOfContact);
 
-                if (pointOfContact == Side::UP) {
-                    // put ball to position above brick
-                    gameBall.y = brick.y - gameBall.getTexture().getHeight();
-                    gameBall._collisionBox.y = gameBall.y;
-                }
-                else if (pointOfContact == Side::DOWN) {
-                    gameBall.y = brick.y + brick._collisionBox.h;
-                    gameBall._collisionBox.y = gameBall.y;
-                }
-                else if (pointOfContact == Side::RIGHT) {
-                    gameBall.x = brick.x + brick._collisionBox.w;
-                    gameBall._collisionBox.x = gameBall.x;
-                }
-                else if (pointOfContact == Side::LEFT) {
-                    gameBall.x = brick.x - gameBall.getTexture().getWidth();
-                    gameBall._collisionBox.x = gameBall.x;
+                    if (pointOfContact == Side::UP) {
+                        // put ball to position above brick
+                        gameBall.y = brick.y - gameBall.getTexture().getHeight();
+                        gameBall._collisionBox.y = gameBall.y;
+                    }
+                    else if (pointOfContact == Side::DOWN) {
+                        gameBall.y = brick.y + brick._collisionBox.h;
+                        gameBall._collisionBox.y = gameBall.y;
+                    }
+                    else if (pointOfContact == Side::RIGHT) {
+                        gameBall.x = brick.x + brick._collisionBox.w;
+                        gameBall._collisionBox.x = gameBall.x;
+                    }
+                    else if (pointOfContact == Side::LEFT) {
+                        gameBall.x = brick.x - gameBall.getTexture().getWidth();
+                        gameBall._collisionBox.x = gameBall.x;
+                    }
                 }
             }
         }

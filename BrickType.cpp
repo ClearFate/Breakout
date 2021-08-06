@@ -1,10 +1,10 @@
 #include "BrickType.h"
 
-int BrickType::_rbr_counter = 0;
+int BrickType::index_counter_sequence = 0;
 
 BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource) {
 
-	_rbr = _rbr_counter++;
+	_index = index_counter_sequence++;
 	_ID = id;
 	_hitpoints = hp;
 	_breakScore = score;
@@ -12,9 +12,51 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 	_brick = resource;
 }
 
+brickResources* BrickType::loseHP()
+{
+	if (_hitpoints > 0) {
+		_hitpoints--;
+	}
+
+	return nullptr;
+}
+
 void BrickType::updateCollisionBox()
 {
 	_collisionBox = { x,y, _brick->getTexture()->getWidth(), _brick->getTexture()->getHeight() };
+}
+
+int BrickType::getIndex()
+{
+	return _index;
+}
+
+int BrickType::getHitpoints()
+{
+	return _hitpoints;
+}
+
+int BrickType::getBreakScore()
+{
+	return _breakScore;
+}
+
+bool BrickType::IsBreakable()
+{
+	return _isBreakable;
+}
+
+bool BrickType::IsKilled()
+{
+	return _hitpoints <= 0;
+}
+
+bool BrickType::changeResource(brickResources* res){
+	
+	if (res != nullptr) {
+		_brick = res;
+	}
+	return res != nullptr;
 }
 
 brickResources* BrickType::getResources()
