@@ -148,7 +148,7 @@ void parseLevelLayout(Level& lvl, int brickWidth, int brickHeight, std::string l
 }
 
 bool GameUtil::loadGameFont() {
-	gameFont = TTF_OpenFont("font/AttackGraffiti-3zRBM.ttf", 24);
+	gameFont = TTF_OpenFont("font/AttackGraffiti-3zRBM.ttf", 36);
 	if (gameFont == NULL) {
 		printf("Greska pri ucitavanju game fonta: %s \n", TTF_GetError());
 	}

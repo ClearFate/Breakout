@@ -12,6 +12,7 @@ class DirectionVector
 public:
 
 	void perfectBounce(Side pointOfContact);
+	void rotateBounce(double steepnessInterval, Side direction);
 	void setUpDirection(double upVelocity);
 	void setRightDirection(double rightVelocity);
 
@@ -26,6 +27,7 @@ private:
 	double moveRight = 0;  // here so the information about original direction where ball is heading is retained in up and right Direction
 
 	void normalize();
+	double getVectorLength();
 
 };
 

@@ -3,6 +3,8 @@
 #include <string>
 #include <SDL_mixer.h>
 
+extern int gameScore;
+
 class brickResources //flyweight
 {
 public:
@@ -34,7 +36,7 @@ class BrickType
 {
 public:
 	BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource);
-	brickResources* loseHP(); //when hit by ball change resources accordingly to number of hp left
+	void loseHP(); //when hit by ball change resources accordingly to number of hp left
 	void updateCollisionBox();
 
 	int getIndex();

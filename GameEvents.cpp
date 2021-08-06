@@ -12,14 +12,6 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
         case SDLK_LEFT:
             gamePad.getDirectionVector().setRightDirection(-1);
             break;
-       
-        //case SDLK_UP:
-        //    gameBall.getDirectionVector().setUpDirection(-1);
-        //    break;
-
-        //case SDLK_DOWN:
-        //    gameBall.getDirectionVector().setUpDirection(1);
-        //    break;
 
         }
     }
@@ -34,14 +26,6 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
         case SDLK_LEFT:
             gamePad.getDirectionVector().setRightDirection(0);
             break;
-
-        /*case SDLK_UP:
-            gameBall.getDirectionVector().setUpDirection(0);
-            break;
-
-        case SDLK_DOWN:
-            gameBall.getDirectionVector().setUpDirection(0);
-            break;*/
 
         }
     }
@@ -105,9 +89,13 @@ void handleCollision_PadAndBall() {
     if (GameUtil::checkCollision(gameBall._collisionBox, gamePad._collisionBox)) {  // if ball collides with left border of window
         Side pointOfContact = GameUtil::returnSideOfCollision(gamePad._collisionBox, gameBall._collisionBox);
 
-        gameBall.getDirectionVector().perfectBounce(pointOfContact);
+        //gameBall.getDirectionVector().perfectBounce(pointOfContact);
 
         if (pointOfContact == Side::UP) {
+            // add zone logic here
+
+            //-------------------------------
+            gameBall.getDirectionVector().perfectBounce(pointOfContact);  // if white zone
             // put ball to position above brick
             gameBall.y = gamePad.y - gameBall.getTexture().getHeight();
             gameBall._collisionBox.y = gameBall.y;

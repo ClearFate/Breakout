@@ -14,18 +14,17 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 	_breakSound = _brick->getBreakSound();
 }
 
-brickResources* BrickType::loseHP()
+void BrickType::loseHP()
 {
 	_hitpoints--;
-
 	if (_hitpoints == 0) {
 		Mix_PlayChannel(-1, _breakSound, 0);
+		gameScore += _breakScore;
 	}
 	else {
 		Mix_PlayChannel(-1, _brick->getHitSound(), 0);
+		
 	}
-
-	return nullptr;
 }
 
 void BrickType::updateCollisionBox()

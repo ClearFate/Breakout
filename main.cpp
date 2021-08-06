@@ -3,7 +3,7 @@
 #include "GameBall.h"
 #include "GameTimer.h"
 #include "GamePad.h"
-
+using std::string;
 
 //global game context
 const int GAME_WIDTH = 1366;  //1366
@@ -21,22 +21,29 @@ SDL_Renderer* gameRenderer = NULL;
 vector<Level> gameLevelList;
 GameBall gameBall;  // loading of textures you can do only after you've initialized SDL subsystems
 GamePad gamePad;
+int gameScore = 0;
+string stringScore = "";
+Tekstura gameScoreTexture;
 //------------------------------------------------------------
 bool gameIsRunning = true;
 SDL_Event event;
 Level currentGameLevel;
 
-
 int main(int argc, char* argv[]) {
-
+	
 	if (GameUtil::init("Breakout") == false) {
 		std::cout << "\nIgra nije uspjela ucitati potrebne podsisteme.\nTerminirano izvrsavanje igre.\n";
 		return -1;
 	}
+	int gameScoreCopy = gameScore;
 	GameUtil::loadGameFont();
+	SDL_Color gameScoreColor = {255,255,255};
+	stringScore = std::to_string(gameScore);
+	gameScoreTexture.loadBlendedText(stringScore.c_str(), gameScoreColor, 1000);
+
 	GameUtil::loadLevel("levelsXML.xml");
 	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 450, "images/ball2.png");
-	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 450, "images/pad.png");
+	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2 + 250, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 450, "images/pad.png");
 
 	int currLvlIndex = 0;
 	currentGameLevel = gameLevelList[currLvlIndex];
@@ -70,6 +77,7 @@ int main(int argc, char* argv[]) {
 	// update position of resouces on the screen
 	currentGameLevel._background.render(0, 0);
 	
+	//very ugly bit of code but done in hurry
 	if (!GameUtil::renderBricks(currentGameLevel)) {
 		if (currLvlIndex+1 >= gameLevelList.size()) {  // if there are no more lvls to switch to - player wins
 			SDL_Delay(2000);
@@ -79,12 +87,19 @@ int main(int argc, char* argv[]) {
 			currentGameLevel = gameLevelList[++currLvlIndex];
 		}
 	}
+	//------------------------------------------
 
 	gameBall.getTexture().render(gameBall.x, gameBall.y);
 	gamePad.getTexture().render(gamePad.x, gamePad.y);
-
-	GameUtil::showBrickCollisionBoxes();
-	GameUtil::showBallAndPadCollisionBoxes();
+	
+	if (gameScore != gameScoreCopy) {
+		stringScore = std::to_string(gameScore);
+		gameScoreTexture.loadBlendedText(stringScore.c_str(), gameScoreColor, 1000);
+		gameScoreCopy = gameScore;
+	}
+	gameScoreTexture.render(GAME_WIDTH - (gameScoreTexture.getWidth()+20), 5);
+	//GameUtil::showBrickCollisionBoxes();
+	//GameUtil::showBallAndPadCollisionBoxes();
 
 	//Update screen
 	SDL_RenderPresent(gameRenderer);
