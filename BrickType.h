@@ -1,6 +1,7 @@
 #pragma once
 #include "tekstura.h"
 #include <string>
+#include <SDL_mixer.h>
 
 class brickResources //flyweight
 {
@@ -58,6 +59,7 @@ private:
 	bool _isBreakable = true;
 
 	brickResources* _brick;
+	Mix_Chunk* _breakSound = nullptr;
 	
 
 };

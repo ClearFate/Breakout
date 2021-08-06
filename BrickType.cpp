@@ -10,12 +10,19 @@ BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickRes
 	_breakScore = score;
 	_isBreakable = breakable;
 	_brick = resource;
+
+	_breakSound = _brick->getBreakSound();
 }
 
 brickResources* BrickType::loseHP()
 {
-	if (_hitpoints > 0) {
-		_hitpoints--;
+	_hitpoints--;
+
+	if (_hitpoints == 0) {
+		Mix_PlayChannel(-1, _breakSound, 0);
+	}
+	else {
+		Mix_PlayChannel(-1, _brick->getHitSound(), 0);
 	}
 
 	return nullptr;

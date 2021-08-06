@@ -10,7 +10,7 @@
             Id="S"   
             Texture="images/1hp.png"   
             HitPoints="1"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit01.ogg"  
             BreakSound="Sounds/break01.ogg"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
@@ -18,7 +18,7 @@
             Id="M"   
             Texture="images/2hp.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit02.ogg"  
             BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
@@ -55,7 +55,7 @@
             Id="S"   
             Texture="images/1hp.png"   
             HitPoints="1"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit01.ogg"  
             BreakSound="Sounds/break01.ogg"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
@@ -63,7 +63,7 @@
             Id="M"   
             Texture="images/2hp.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit02.ogg"  
             BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
@@ -71,7 +71,7 @@
             Id="H"   
             Texture="images/3hp.png"   
             HitPoints="3"   
-            HitSound="Sounds/Hit_01.wav"   
+            HitSound="Sounds/hit03.ogg"   
             BreakSound="Sounds/break01.ogg"  
             BreakScore="150" />  
         <!-- Impenetrable Brick -->  
@@ -101,7 +101,7 @@
             Id="S"   
             Texture="images/1hp.png"   
             HitPoints="1"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit01.ogg"  
             BreakSound="Sounds/Hit_01.wav"  
             BreakScore="50" />  
         <!-- Medium Brick -->  
@@ -109,7 +109,7 @@
             Id="M"   
             Texture="images/2hp.png"   
             HitPoints="2"   
-            HitSound="Sounds/Hit_01.wav"  
+            HitSound="Sounds/hit02.ogg"  
             BreakSound="Sounds/break01.ogg"  
             BreakScore="100" />  
         <!-- Hard Brick -->  
@@ -117,7 +117,7 @@
             Id="H"   
             Texture="images/3hp.png"   
             HitPoints="3"   
-            HitSound="Sounds/hit02.ogg"   
+            HitSound="Sounds/hit03.ogg"   
             BreakSound="Sounds/break01.ogg"  
             BreakScore="150" />  
         <!-- Impenetrable Brick -->  
