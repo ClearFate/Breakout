@@ -1,8 +1,10 @@
 #include "BrickType.h"
 
+int BrickType::_rbr_counter = 0;
 
 BrickType::BrickType(std::string id, int hp, int score, bool breakable, brickResources* resource) {
 
+	_rbr = _rbr_counter++;
 	_ID = id;
 	_hitpoints = hp;
 	_breakScore = score;

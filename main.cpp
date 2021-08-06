@@ -37,7 +37,6 @@ int main(int argc, char* argv[]) {
 	GameUtil::loadLevel("levelsXML.xml");
 	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 200, "images/ball2.png");
 	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 300, "images/pad.png");
-	
 
 	currentGameLevel = gameLevelList[0];
 
@@ -48,7 +47,7 @@ int main(int argc, char* argv[]) {
 	while(gameIsRunning){  //game loop
 		//fpsTimer.Start(); // timer starts here so move and frame cap function later get 
 
-		while (SDL_PollEvent(&event)) {  // event loop
+		while (SDL_PollEvent(&event)) {  // event loop (only active if there are events in the queue)
 			
 			if (event.type == SDL_QUIT) {  // pritisak na x ili ALT+F4
 				gameIsRunning = false;

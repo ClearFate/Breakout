@@ -43,6 +43,9 @@ public:
 	SDL_Rect _collisionBox;
 
 private:
+	int _rbr = 0;
+	static int _rbr_counter;
+
 	std::string _ID = "_";
 	int _hitpoints = 1;
 	int _breakScore = 1;
