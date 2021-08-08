@@ -18,12 +18,18 @@ TTF_Font* gameFont = NULL;
 SDL_Window* gameWindow = NULL;
 SDL_Renderer* gameRenderer = NULL;
 
-vector<Level> gameLevelList;
 GameBall gameBall;  // loading of textures you can do only after you've initialized SDL subsystems
 GamePad gamePad;
+vector<Level> gameLevelList;
+
+bool gameOver = false;
 int gameScore = 0;
 string stringScore = "";
+string lvlTekst = "LVL ";
+Tekstura levelTextTexture;
 Tekstura gameScoreTexture;
+Tekstura startTextTexture;
+
 //------------------------------------------------------------
 bool gameIsRunning = true;
 SDL_Event event;
@@ -35,6 +41,7 @@ int main(int argc, char* argv[]) {
 		std::cout << "\nIgra nije uspjela ucitati potrebne podsisteme.\nTerminirano izvrsavanje igre.\n";
 		return -1;
 	}
+	// LOADING OF ALL THE RESOURCES
 	int gameScoreCopy = gameScore;
 	GameUtil::loadGameFont();
 	SDL_Color gameScoreColor = {255,255,255};
@@ -47,12 +54,19 @@ int main(int argc, char* argv[]) {
 
 	int currLvlIndex = 0;
 	currentGameLevel = gameLevelList[currLvlIndex];
+	lvlTekst += std::to_string(currLvlIndex).c_str();
+	levelTextTexture.loadBlendedText(lvlTekst , gameScoreColor, GAME_WIDTH);
+	bool pauseScreen = true;
+
+	startTextTexture.loadBlendedText("Press UP arrow to start", gameScoreColor, GAME_WIDTH);
 
 	GameTimer fpsTimer;
 	GameTimer deltaTimeTimer;
 
+	// STARTING THE GAME
 	while(gameIsRunning){  //game loop
 		fpsTimer.Start(); // timer starts here so move and frame cap function later get 
+		
 
 		while (SDL_PollEvent(&event)) {  // event loop (only active if there are events in the queue)
 			
@@ -80,11 +94,20 @@ int main(int argc, char* argv[]) {
 	//very ugly bit of code but done in hurry
 	if (!GameUtil::renderBricks(currentGameLevel)) {
 		if (currLvlIndex+1 >= gameLevelList.size()) {  // if there are no more lvls to switch to - player wins
-			SDL_Delay(2000);
+			lvlTekst = "Victory";
+			levelTextTexture.loadBlendedText(lvlTekst, gameScoreColor, GAME_WIDTH);
 			gameIsRunning = false;
+			gameOver = true;
 		}
 		else {
 			currentGameLevel = gameLevelList[++currLvlIndex];
+			lvlTekst = "LVL ";
+			lvlTekst += std::to_string(currLvlIndex).c_str();
+			levelTextTexture.loadBlendedText(lvlTekst, gameScoreColor, GAME_WIDTH);
+			pauseScreen = true;
+
+			gamePad.x = GAME_WIDTH / 2;
+
 		}
 	}
 	//------------------------------------------
@@ -100,15 +123,45 @@ int main(int argc, char* argv[]) {
 	gameScoreTexture.render(GAME_WIDTH - (gameScoreTexture.getWidth()+20), 5);
 	//GameUtil::showBrickCollisionBoxes();
 	//GameUtil::showBallAndPadCollisionBoxes();
-	GameUtil::showBallDirectionVector();
+	//GameUtil::showBallDirectionVector();
 
 	//Update screen
+	if (pauseScreen && !gameOver) {
+		levelTextTexture.render(GAME_WIDTH / 2 - levelTextTexture.getWidth() / 2, GAME_HEIGHT / 2 - levelTextTexture.getHeight() / 2  - 50);
+		startTextTexture.render(GAME_WIDTH / 2 - startTextTexture.getWidth() / 2, GAME_HEIGHT / 2 - startTextTexture.getHeight() / 2);
+	}
+	if (gameOver) {
+		levelTextTexture.render(GAME_WIDTH / 2 - levelTextTexture.getWidth() / 2, GAME_HEIGHT / 2 - levelTextTexture.getHeight() / 2 - 50);
+	}
+
 	SDL_RenderPresent(gameRenderer);
 	
 	int elapsedMiliseconds = fpsTimer.GetTicks();
 	if (elapsedMiliseconds < TIME_RESERVED_FOR_ONE_FRAME) {  // to cap game execution to constant 60 fps
 		
 		SDL_Delay( TIME_RESERVED_FOR_ONE_FRAME - elapsedMiliseconds );
+	}
+
+	if (pauseScreen) {
+		fpsTimer.Pause();
+		deltaTimeTimer.Pause();
+
+		bool startKeyPressed = true;
+		while (startKeyPressed) {  // event loop (only active if there are events in the queue)
+
+			while (SDL_PollEvent(&event)) {
+				if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {  // we only care about first DOWN PRESS OF A KEY (when holding a key SDL reports it as multiple presses of same key)
+					switch (event.key.keysym.sym) {
+
+					case SDLK_UP:
+						startKeyPressed = false;
+						break;
+					}
+				}
+			}
+		}
+
+		pauseScreen = false;
 	}
 
 	} // END OF GAME LOOP

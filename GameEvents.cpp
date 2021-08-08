@@ -5,15 +5,6 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {  // we only care about first DOWN PRESS OF A KEY (when holding a key SDL reports it as multiple presses of same key)
         switch (e.key.keysym.sym) {
 
-        //case SDLK_RIGHT:
-        //    gameBall.getDirectionVector().bounce(0);
-        //    break;
-
-        //case SDLK_LEFT:
-        //    
-        //    break;
-
-
         case SDLK_RIGHT:
             gamePad.sideVelocity = 1;
             break;
@@ -49,30 +40,36 @@ void handleCollision_BricksAndBall() {
 
             if (!brick.IsKilled()) {
                 if (GameUtil::checkCollision(gameBall._collisionBox, brick._collisionBox)) {
-                    if (brick.IsBreakable())
+                    if (brick.IsBreakable()) {
                         brick.loseHP();
                         brickResources* newRes = currentGameLevel.findBrickByHP(brick.getHitpoints());
                         brick.changeResource(newRes);
-
+                    }
+                    else {
+                        Mix_PlayChannel(-1, brick.getResources()->getHitSound(), 0);
+                    }
+                        
                     // additional checks to determine how to bounce the ball off off the brick
                     Side pointOfContact = GameUtil::returnSideOfCollision(brick._collisionBox, gameBall._collisionBox);
-                    gameBall.getDirectionVector().bounce(0);
-                    //                gameBall.getDirectionVector().perfectBounce(pointOfContact);
-
+                    
                     if (pointOfContact == Side::UP) {
                         // put ball to position above brick
+                        gameBall.getDirectionVector().bounce(0);
                         gameBall.y = brick.y - gameBall.getTexture().getHeight();
                         gameBall._collisionBox.y = gameBall.y;
                     }
                     else if (pointOfContact == Side::DOWN) {
+                        gameBall.getDirectionVector().bounce(0);
                         gameBall.y = brick.y + brick._collisionBox.h;
                         gameBall._collisionBox.y = gameBall.y;
                     }
                     else if (pointOfContact == Side::RIGHT) {
+                        gameBall.getDirectionVector().invertSideDirection();
                         gameBall.x = brick.x + brick._collisionBox.w;
                         gameBall._collisionBox.x = gameBall.x;
                     }
                     else if (pointOfContact == Side::LEFT) {
+                        gameBall.getDirectionVector().invertSideDirection();
                         gameBall.x = brick.x - gameBall.getTexture().getWidth();
                         gameBall._collisionBox.x = gameBall.x;
                     }
@@ -114,13 +111,13 @@ void handleCollision_PadAndBall() {
             double ballStart = gameBall._collisionBox.x;
             double ballEnd = gameBall._collisionBox.x + gameBall._collisionBox.w;
 
-            if (ballCenter > leftZoneStart && ballCenter < centerZoneStart) {  // LEFT SIDE OF PAD
-                double steepnessInterval = (centerZoneStart - ballCenter) / (centerZoneStart - leftZoneStart);
+            if (ballEnd > leftZoneStart && ballCenter < centerZoneStart) {  // LEFT SIDE OF PAD
+                double steepnessInterval = (centerZoneStart - ballEnd) / (centerZoneStart - leftZoneStart);
                 gameBall.getDirectionVector().bounce(steepnessInterval * -1);
             }
-            else if (ballCenter > centerZoneEnd && ballCenter < rightZoneEnd) {
+            else if (ballCenter > centerZoneEnd && ballStart < rightZoneEnd) {
 
-                double steepnessInterval = (ballCenter - centerZoneEnd) / (rightZoneEnd - centerZoneEnd);
+                double steepnessInterval = (ballStart - centerZoneEnd) / (rightZoneEnd - centerZoneEnd);
                 gameBall.getDirectionVector().bounce(steepnessInterval);
             }
             else {
@@ -164,6 +161,9 @@ void handleCollision_BallAndGameWindow() {
         //gameBall.getDirectionVector().invertSideDirection();
     }
     else if (GameUtil::checkCollision(gameBall._collisionBox, { -1, GAME_HEIGHT, GAME_WIDTH + 2, 50 })) {  // if ball collides with bottom border of window end the game
+
+        levelTextTexture.loadBlendedText("Game Over", { 255,255,255 }, GAME_WIDTH);
+        gameOver = true;
         gameIsRunning = false;
     }
 }

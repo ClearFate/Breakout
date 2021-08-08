@@ -3,6 +3,8 @@
 #include "Level.h"
 #include "GameBall.h"
 #include "GamePad.h"
+#include "Tekstura.h"
+#include <SDL_mixer.h>
 
 extern bool gameIsRunning;
 extern SDL_Window* gameWindow;
@@ -13,6 +15,9 @@ extern Level currentGameLevel;
 
 extern GameBall gameBall;
 extern GamePad gamePad;
+
+extern Tekstura levelTextTexture;
+extern bool gameOver;
 
 namespace EventUtil {
 

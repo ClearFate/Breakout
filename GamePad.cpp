@@ -10,7 +10,7 @@ GamePad::GamePad(int newX, int newY, double padSpeed, std::string padTexturePath
     y = newY;
     _padSpeed = padSpeed;
 
-    if (!_padTexture.loadScaledFromFile(padTexturePath, GAME_WIDTH / 15, 17)) {  // load ball texture
+    if (!_padTexture.loadScaledFromFile(padTexturePath, GAME_WIDTH / 10, 17)) {  // load ball texture
         printf("Greska prilikom ucitavanja slike game pad-a \"%s\".", padTexturePath.c_str());
     }
 
@@ -28,17 +28,6 @@ void GamePad::move(double deltaTime)  // deltaTime for frame rate independant mo
     _collisionBox.y = y;
 
 }
-
-//int GamePad::getWidth()
-//{
-//    return _width;
-//}
-//
-//int GamePad::getHeight()
-//{
-//    return _height;
-//}
-
 DirectionVector& GamePad::getDirectionVector()
 {
     return _direction;

@@ -1,8 +1,8 @@
 <Level   
-    RowCount="3"   
-    ColumnCount="14"   
-    RowSpacing="5"  
-    ColumnSpacing="5"  
+    RowCount="2"   
+    ColumnCount="12"   
+    RowSpacing="15"  
+    ColumnSpacing="15"  
     BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
@@ -34,19 +34,18 @@
             Id="I"   
             Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/break01.ogg" />  
+            HitSound="Sounds/Blop-Mark_DiAngelo-79054334.wav" />  
     </BrickTypes>  
     <Bricks>  
-        x x x x x x x x x x x x x x 
-        x x x x _ _ x x _ _ x x x x   
-        x x x x x x x x x x x x S x  
+        S S _ _ _ _ _ _ _ _ S S 
+        M _ _ S S _ _ S S _ _ M   
     </Bricks>    
 </Level>
 
 <Level   
-    RowCount="4"   
-    ColumnCount="8"   
-    RowSpacing="10"  
+    RowCount="3"   
+    ColumnCount="14"   
+    RowSpacing="30"  
     ColumnSpacing="10"  
     BackgroundTexture="images/background.png">  
     <BrickTypes>  
@@ -79,21 +78,20 @@
             Id="I"   
             Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/break01.ogg" />  
+            HitSound="Sounds/Blop-Mark_DiAngelo-79054334.wav" />  
     </BrickTypes>  
     <Bricks>  
-        S x x x x x x x  
-        x x x x x x x M
-        x x x x x x x x
-        x x x x x x x x
+        S S S I S I S S I S I S S S  
+        S S S I S I S S I S I S S S  
+        M M M I M I M M I M I M M M  
     </Bricks>    
 </Level>
 
 <Level   
-    RowCount="2"   
-    ColumnCount="5"   
-    RowSpacing="20"  
-    ColumnSpacing="20"  
+    RowCount="4"   
+    ColumnCount="12"   
+    RowSpacing="10"  
+    ColumnSpacing="30"  
     BackgroundTexture="images/background.png">  
     <BrickTypes>  
         <!-- Soft Brick -->  
@@ -125,10 +123,12 @@
             Id="I"   
             Texture="images/unbreakable.png"   
             HitPoints="Infinite"   
-            HitSound="Sounds/break01.ogg" />  
+            HitSound="Sounds/Blop-Mark_DiAngelo-79054334.wav" />  
     </BrickTypes>  
     <Bricks>  
-        x x x x x
-        H H x x x
+        H S S S S S S S S S S H  
+        H S I S I M M I S I S H  
+        H S I M I H H I M I S H
+        _ _ I I I _ _ I I I _ _
     </Bricks>    
 </Level>
