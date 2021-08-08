@@ -5,22 +5,22 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {  // we only care about first DOWN PRESS OF A KEY (when holding a key SDL reports it as multiple presses of same key)
         switch (e.key.keysym.sym) {
 
-        case SDLK_RIGHT:
-            gameBall.getDirectionVector().bounce(0);
-            break;
-
-        case SDLK_LEFT:
-            
-            break;
-
-
         //case SDLK_RIGHT:
-        //    gamePad.getDirectionVector().setRightDirection(1);
+        //    gameBall.getDirectionVector().bounce(0);
         //    break;
 
         //case SDLK_LEFT:
-        //    gamePad.getDirectionVector().setRightDirection(-1);
+        //    
         //    break;
+
+
+        case SDLK_RIGHT:
+            gamePad.sideVelocity = 1;
+            break;
+
+        case SDLK_LEFT:
+            gamePad.sideVelocity = -1;
+            break;
 
         }
     }
@@ -28,13 +28,13 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
     if (e.type == SDL_KEYUP && e.key.repeat == 0) {  
         switch (e.key.keysym.sym) {
 
-        //case SDLK_RIGHT:
-        //    gamePad.getDirectionVector().setRightDirection(0);
-        //    break;
+        case SDLK_RIGHT:
+            gamePad.sideVelocity = 0;
+            break;
 
-        //case SDLK_LEFT:
-        //    gamePad.getDirectionVector().setRightDirection(0);
-        //    break;
+        case SDLK_LEFT:
+            gamePad.sideVelocity = 0;
+            break;
 
         }
     }
@@ -101,6 +101,9 @@ void handleCollision_PadAndBall() {
 
         if (pointOfContact == Side::UP) {
             // add zone logic here
+            
+            //TEMP
+            gameBall.getDirectionVector().bounce(0);
 
             //-------------------------------
      //       gameBall.getDirectionVector().perfectBounce(pointOfContact);  // if white zone
@@ -125,17 +128,20 @@ void handleCollision_BallAndGameWindow() {
     if (GameUtil::checkCollision(gameBall._collisionBox, { -50, -1, 50, GAME_HEIGHT + 2 })) {  // if ball collides with left border of window
         gameBall.x = 0;
         gameBall._collisionBox.x = 0;
- //       gameBall.getDirectionVector().perfectBounce(Side::RIGHT);
+        //gameBall.getDirectionVector().bounce(0);  // perfect bounce with no additional angles added
+        gameBall.getDirectionVector().invertSideDirection();
     }
     else if (GameUtil::checkCollision(gameBall._collisionBox, { GAME_WIDTH, -1, 50, GAME_HEIGHT + 2 })) {  // if ball collides with right border of window
         gameBall.x = GAME_WIDTH - gameBall.getTexture().getWidth();
         gameBall._collisionBox.x = gameBall.x;
- //       gameBall.getDirectionVector().perfectBounce(Side::LEFT);
+        //gameBall.getDirectionVector().bounce(0);
+        gameBall.getDirectionVector().invertSideDirection();
     }
     else if (GameUtil::checkCollision(gameBall._collisionBox, { -1, -50, GAME_WIDTH + 2, 50 })) {  // if ball collides with top border of window
         gameBall.y = 0;
         gameBall._collisionBox.y = 0;
- //       gameBall.getDirectionVector().perfectBounce(Side::DOWN);
+        gameBall.getDirectionVector().bounce(0);
+        //gameBall.getDirectionVector().invertSideDirection();
     }
     else if (GameUtil::checkCollision(gameBall._collisionBox, { -1, GAME_HEIGHT, GAME_WIDTH + 2, 50 })) {  // if ball collides with bottom border of window end the game
         gameIsRunning = false;

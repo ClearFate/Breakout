@@ -14,7 +14,7 @@ public:
 	SDL_Rect _collisionBox = { 0,0,0,0 };
 
 	GameBall();
-	GameBall(int x, int y, double upDirection, double rightDirection, double ballSpeed, std::string texturePath);
+	GameBall(int x, int y, double ballSpeed, std::string texturePath);
 	void move(double deltaTime);  
 
 	//int getWidth();

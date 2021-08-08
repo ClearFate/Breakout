@@ -39,6 +39,10 @@ void DirectionVector::rotateDirection(double kutD) {
 	_y = transY;
 }
 
+void DirectionVector::invertSideDirection(){
+	_x = -_x;
+}
+
 double DirectionVector::vectorDirectionAngle()
 {
 	double kutR = acos(_x);
@@ -69,38 +73,5 @@ double DirectionVector::getRightUnitVector(){
 	return _x;
 }
 
-//void DirectionVector::rotateBounce(double steepnessInterval, Side direction)
-//{
-//	// to mirror it back
-//	perfectBounce(Side::UP);
-//
-//	// now we can do calculations to find out mirrored angle
-//	double bounceOffAngle;
-//	double r = getVectorLength();
-//	double x = moveRight;
-//	double y = moveUp;
-//
-//	// x = r * cos(fi) => fi = acos(x/r) * pi/180
-//	double fi = acos(x / r) * PI / 180;   // * PI/180 je da dobijemo stupnjeve a ne radiane
-//	double angleDiff;
-//
-//	if (direction == Side::LEFT) {
-//		bounceOffAngle = 175;
-//		angleDiff = abs(bounceOffAngle - fi);
-//	}
-//	else if (direction == Side::RIGHT) {
-//		bounceOffAngle = 5;
-//		angleDiff = -abs(fi - bounceOffAngle);
-//	}
-//
-//	double resultingAngle = steepnessInterval * angleDiff;
-//
-//	double newX = x * cos(resultingAngle) - y * sin(resultingAngle);
-//	double newY = x * sin(resultingAngle) + y * cos(resultingAngle);
-//
-//	upDirection = newY;
-//	rightDirection = newX;
-//	normalize();
-//
-//}
+
 

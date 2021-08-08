@@ -42,8 +42,8 @@ int main(int argc, char* argv[]) {
 	gameScoreTexture.loadBlendedText(stringScore.c_str(), gameScoreColor, 1000);
 
 	GameUtil::loadLevel("levelsXML.xml");
-	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2-300, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 2, 450, "images/ball2.png");
-	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2 + 250, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 450, "images/pad.png");
+	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2-300, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 450, "images/ball2.png");
+	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 450, "images/pad.png");
 
 	int currLvlIndex = 0;
 	currentGameLevel = gameLevelList[currLvlIndex];
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 	GameTimer deltaTimeTimer;
 
 	while(gameIsRunning){  //game loop
-		//fpsTimer.Start(); // timer starts here so move and frame cap function later get 
+		fpsTimer.Start(); // timer starts here so move and frame cap function later get 
 
 		while (SDL_PollEvent(&event)) {  // event loop (only active if there are events in the queue)
 			
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 	
 		EventUtil::handleGameEvents();
 	// EXECUTE GAME LOGIC
-		//gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
+		gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
 		gamePad.move(deltaTimeTimer.GetTicks() / 1000.);
 
 		deltaTimeTimer.Start();  // this timer goes right after move calls
@@ -98,8 +98,8 @@ int main(int argc, char* argv[]) {
 		gameScoreCopy = gameScore;
 	}
 	gameScoreTexture.render(GAME_WIDTH - (gameScoreTexture.getWidth()+20), 5);
-	GameUtil::showBrickCollisionBoxes();
-	GameUtil::showBallAndPadCollisionBoxes();
+	//GameUtil::showBrickCollisionBoxes();
+	//GameUtil::showBallAndPadCollisionBoxes();
 	GameUtil::showBallDirectionVector();
 
 	//Update screen

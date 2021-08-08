@@ -12,6 +12,7 @@ public:
 	
 	void bounce(double sideForce);
 	void rotateDirection(double kutD);
+	void invertSideDirection();
 	
 	double getUpUnitVector();
 	double getRightUnitVector();

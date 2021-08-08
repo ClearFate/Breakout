@@ -4,7 +4,7 @@ GameBall::GameBall() {
 
 }
 
-GameBall::GameBall(int newX, int newY, double upDirection, double rightDirection, double ballSpeed, std::string ballTexturePath)
+GameBall::GameBall(int newX, int newY, double ballSpeed, std::string ballTexturePath)
 {
     x = newX;
     y = newY;
