@@ -62,6 +62,13 @@ void DirectionVector::bounce(double sideForce){  // sideforce is in interval [-1
 	double exitRotationDone = abs(vectorDirectionAngle() - 90);
 	double maxAdditionalRotation = maxSideRotation - exitRotationDone;
 
+	if (sideForce < 0 && vectorDirectionAngle() < 90) {
+		maxAdditionalRotation = 90 + maxSideRotation - vectorDirectionAngle();
+	}
+	else if (sideForce > 0 && vectorDirectionAngle() > 90 ) {
+		maxAdditionalRotation = vectorDirectionAngle();
+	}
+
 	rotateDirection(maxAdditionalRotation * sideForce );
 }
 

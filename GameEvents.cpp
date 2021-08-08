@@ -100,14 +100,34 @@ void handleCollision_PadAndBall() {
         Side pointOfContact = GameUtil::returnSideOfCollision(gamePad._collisionBox, gameBall._collisionBox);
 
         if (pointOfContact == Side::UP) {
-            // add zone logic here
-            
-            //TEMP
-            gameBall.getDirectionVector().bounce(0);
+            // pad zone logic
+            double padX = gamePad._collisionBox.x;
+            double padWidth = gamePad._collisionBox.w;
+            double padCenter = padX + padWidth / 2;
+
+            double centerZoneStart = padCenter - padWidth * 0.1; // this is also leftZoneEnd
+            double centerZoneEnd = padCenter + padWidth * 0.1;   // this is rightZoneStart
+            double leftZoneStart = padX;
+            double rightZoneEnd = padX + padWidth;
+
+            double ballCenter = gameBall._collisionBox.x + gameBall._collisionBox.w / 2;
+            double ballStart = gameBall._collisionBox.x;
+            double ballEnd = gameBall._collisionBox.x + gameBall._collisionBox.w;
+
+            if (ballCenter > leftZoneStart && ballCenter < centerZoneStart) {  // LEFT SIDE OF PAD
+                double steepnessInterval = (centerZoneStart - ballCenter) / (centerZoneStart - leftZoneStart);
+                gameBall.getDirectionVector().bounce(steepnessInterval * -1);
+            }
+            else if (ballCenter > centerZoneEnd && ballCenter < rightZoneEnd) {
+
+                double steepnessInterval = (ballCenter - centerZoneEnd) / (rightZoneEnd - centerZoneEnd);
+                gameBall.getDirectionVector().bounce(steepnessInterval);
+            }
+            else {
+                gameBall.getDirectionVector().bounce(0);  // middle zone of pad is pervect bounce ( preserves entering angle )
+            }
 
             //-------------------------------
-     //       gameBall.getDirectionVector().perfectBounce(pointOfContact);  // if white zone
-            // put ball to position above brick
             gameBall.y = gamePad.y - gameBall.getTexture().getHeight();
             gameBall._collisionBox.y = gameBall.y;
         }
