@@ -6,11 +6,11 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
         switch (e.key.keysym.sym) {
 
         case SDLK_RIGHT:
-            gamePad.getDirectionVector().setRightDirection(1);
+            //gamePad.getDirectionVector().setRightDirection(1);
             break;
 
         case SDLK_LEFT:
-            gamePad.getDirectionVector().setRightDirection(-1);
+            //gamePad.getDirectionVector().setRightDirection(-1);
             break;
 
         }
@@ -20,11 +20,11 @@ void EventUtil::handlePlayerInput(SDL_Event& e) {
         switch (e.key.keysym.sym) {
 
         case SDLK_RIGHT:
-            gamePad.getDirectionVector().setRightDirection(0);
+            //gamePad.getDirectionVector().setRightDirection(0);
             break;
 
         case SDLK_LEFT:
-            gamePad.getDirectionVector().setRightDirection(0);
+            //gamePad.getDirectionVector().setRightDirection(0);
             break;
 
         }

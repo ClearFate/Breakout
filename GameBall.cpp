@@ -9,8 +9,7 @@ GameBall::GameBall(int newX, int newY, double upDirection, double rightDirection
     x = newX;
     y = newY;
     _ballSpeed = ballSpeed;
-    _direction.setRightDirection(rightDirection);
-    _direction.setUpDirection(upDirection);
+    _direction.rotateDirection(-90); //direction vector defaults are to x-axis unit vector so here we rotate that default direction
     
     if (! _ballTexture.loadScaledFromFile(ballTexturePath, 20, 20)) {  // load ball texture
         printf("Greska prilikom ucitavanja slike lopte \"%s\".", ballTexturePath.c_str());
@@ -30,23 +29,11 @@ void GameBall::move(double deltaTime)  // deltaTime for frame rate independant m
     x += int(_direction.getRightUnitVector() * _ballSpeed * deltaTime);
     y += int(_direction.getUpUnitVector() * _ballSpeed * deltaTime);
 
-    //printf("R: %d  U: %d  SPD %lf  D %lf\n", rDiff, uDiff, _ballSpeed, deltaTime);
-
     //update x and y of collisionBox to new values 
     _collisionBox.x = x;
     _collisionBox.y = y;
 
 }
-
-//int GameBall::getWidth()
-//{
-//    return _width;
-//}
-//
-//int GameBall::getHeight()
-//{
-//    return _height;
-//}
 
 DirectionVector& GameBall::getDirectionVector()
 {

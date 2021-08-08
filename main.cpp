@@ -6,8 +6,8 @@
 using std::string;
 
 //global game context
-const int GAME_WIDTH = 1366;  //1366
-const int GAME_HEIGHT = 720;  //720
+const int GAME_WIDTH = 1024;  //1366
+const int GAME_HEIGHT = 640;  //720
 const int GAME_FRAME_RATE = 60;
 
 #define milisecondsInOneSecond 1000
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 	gameScoreTexture.loadBlendedText(stringScore.c_str(), gameScoreColor, 1000);
 
 	GameUtil::loadLevel("levelsXML.xml");
-	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 1, 450, "images/ball2.png");
+	gameBall = GameBall(GAME_WIDTH / 2 - gameBall.getTexture().getWidth()/2-300, GAME_HEIGHT / 2 - gameBall.getTexture().getHeight() / 2, 1, 2, 450, "images/ball2.png");
 	gamePad = GamePad(GAME_WIDTH / 2 - gamePad.getTexture().getWidth()/2 + 250, GAME_HEIGHT - 50 - gamePad.getTexture().getHeight() / 2, 0, 450, "images/pad.png");
 
 	int currLvlIndex = 0;
@@ -98,8 +98,8 @@ int main(int argc, char* argv[]) {
 		gameScoreCopy = gameScore;
 	}
 	gameScoreTexture.render(GAME_WIDTH - (gameScoreTexture.getWidth()+20), 5);
-	//GameUtil::showBrickCollisionBoxes();
-	//GameUtil::showBallAndPadCollisionBoxes();
+	GameUtil::showBrickCollisionBoxes();
+	GameUtil::showBallAndPadCollisionBoxes();
 
 	//Update screen
 	SDL_RenderPresent(gameRenderer);
@@ -111,6 +111,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	} // END OF GAME LOOP
+	SDL_Delay(2000);
 
 	for (auto& lvl : gameLevelList) {
 		lvl.destroyLevel();

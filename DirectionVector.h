@@ -10,24 +10,22 @@ enum class Side {
 class DirectionVector
 {
 public:
-
-	void perfectBounce(Side pointOfContact);
-	void rotateBounce(double steepnessInterval, Side direction);
-	void setUpDirection(double upVelocity);
-	void setRightDirection(double rightVelocity);
-
+	
+	void bounce();
+	void rotateDirection(double kutD);
+	
 	double getUpUnitVector();
 	double getRightUnitVector();
 
 private:
-	double upDirection = 0;     //  if -1 it's down  
-	double rightDirection = 0;  //  if -1 it's left
-
-	double moveUp = 0;     // unit vector of current movement direction
-	double moveRight = 0;  // here so the information about original direction where ball is heading is retained in up and right Direction
+	double _x =  0;
+	double _y = -1;
 
 	void normalize();
-	double getVectorLength();
+	double vectorLength();
+	double degToRad(double kutD);
+	double radToDeg(double kutR);
+	double vectorDirectionAngle();
 
 };
 
