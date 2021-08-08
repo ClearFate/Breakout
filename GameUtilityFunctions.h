@@ -31,6 +31,7 @@ namespace GameUtil {
 	Side returnSideOfCollision(SDL_Rect brickBox, SDL_Rect ballBox);
 	void showBrickCollisionBoxes();
 	void showBallAndPadCollisionBoxes();
+	void showBallDirectionVector();
 	void close();
 	
 }

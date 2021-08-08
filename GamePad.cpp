@@ -9,8 +9,6 @@ GamePad::GamePad(int newX, int newY, double rightDirection, double padSpeed, std
     x = newX;
     y = newY;
     _padSpeed = padSpeed;
-    _direction.setRightDirection(rightDirection);
-    _direction.setUpDirection(0);
 
     if (!_padTexture.loadScaledFromFile(padTexturePath, GAME_WIDTH / 15, 17)) {  // load ball texture
         printf("Greska prilikom ucitavanja slike game pad-a \"%s\".", padTexturePath.c_str());

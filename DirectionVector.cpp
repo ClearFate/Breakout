@@ -29,23 +29,7 @@ double DirectionVector::radToDeg(double kutR) {
 	return kutD;
 }
 
-double DirectionVector::vectorDirectionAngle()
-{
-	double kutR = acos(_x);
-	double kutD = radToDeg(kutR);
-
-	if (_y > 0) {
-		// if acos put it unrigthfully into [0,PI] interval 
-	}
-}
-
-void DirectionVector::bounce(){
-	if (_x >= 0) {
-		
-	}
-}
-
-void DirectionVector::rotateDirection(double kutD){
+void DirectionVector::rotateDirection(double kutD) {
 	double kutR = degToRad(kutD);
 
 	double transX = _x * cos(kutR) - _y * sin(kutR);
@@ -55,7 +39,27 @@ void DirectionVector::rotateDirection(double kutD){
 	_y = transY;
 }
 
+double DirectionVector::vectorDirectionAngle()
+{
+	double kutR = acos(_x);
+	double kutD = radToDeg(kutR);
 
+	return kutD; // returns angle where it should bounce on [0,PI] interval
+}
+
+void DirectionVector::bounce(double sideForce){  // sideforce is in interval [-1,1] -1 for max left additional rotation, 1 for right
+	_y = -_y;
+	normalize();
+
+	// when ball exits it will never have angle less than 10 or greater than 170
+	int maxSideRotation = 80; // pad can rotate max 80 to left and 80 deg to right (160 deg cone from pad normal)
+
+	//rotation made from pad normal
+	double exitRotationDone = abs(vectorDirectionAngle() - 90);
+	double maxAdditionalRotation = maxSideRotation - exitRotationDone;
+
+	rotateDirection(maxAdditionalRotation * sideForce );
+}
 
 double DirectionVector::getUpUnitVector(){
 	return _y;

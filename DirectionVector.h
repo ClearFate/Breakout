@@ -7,11 +7,10 @@ enum class Side {
 	DOWN
 };
 
-class DirectionVector
-{
+class DirectionVector{
 public:
 	
-	void bounce();
+	void bounce(double sideForce);
 	void rotateDirection(double kutD);
 	
 	double getUpUnitVector();
@@ -19,7 +18,7 @@ public:
 
 private:
 	double _x =  0;
-	double _y = -1;
+	double _y =  1;
 
 	void normalize();
 	double vectorLength();

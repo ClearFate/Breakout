@@ -371,5 +371,22 @@ void GameUtil::showBallAndPadCollisionBoxes() {
 	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
 }
 
+void GameUtil::showBallDirectionVector(){
+	int x = gameBall.x;
+	int y = gameBall.y;
+	int x2 = gameBall.getDirectionVector().getRightUnitVector() * 30;
+	int y2 = gameBall.getDirectionVector().getUpUnitVector() * 30;
+	
+	int ballCenterX = x + (gameBall._collisionBox.w / 2);
+	int ballCenterY = y + (gameBall._collisionBox.h / 2);
+
+	
+	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 255, 100);
+
+	SDL_RenderDrawLine(gameRenderer, ballCenterX, ballCenterY, ballCenterX + x2, ballCenterY + y2);
+	
+	SDL_SetRenderDrawColor(gameRenderer, 0, 0, 0, 255);
+}
+
 
 

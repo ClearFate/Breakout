@@ -6,8 +6,8 @@
 using std::string;
 
 //global game context
-const int GAME_WIDTH = 1024;  //1366
-const int GAME_HEIGHT = 640;  //720
+const int GAME_WIDTH = 1366;  //1366
+const int GAME_HEIGHT = 720;  //720
 const int GAME_FRAME_RATE = 60;
 
 #define milisecondsInOneSecond 1000
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 	
 		EventUtil::handleGameEvents();
 	// EXECUTE GAME LOGIC
-		gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
+		//gameBall.move(deltaTimeTimer.GetTicks() / 1000.);
 		gamePad.move(deltaTimeTimer.GetTicks() / 1000.);
 
 		deltaTimeTimer.Start();  // this timer goes right after move calls
@@ -100,6 +100,7 @@ int main(int argc, char* argv[]) {
 	gameScoreTexture.render(GAME_WIDTH - (gameScoreTexture.getWidth()+20), 5);
 	GameUtil::showBrickCollisionBoxes();
 	GameUtil::showBallAndPadCollisionBoxes();
+	GameUtil::showBallDirectionVector();
 
 	//Update screen
 	SDL_RenderPresent(gameRenderer);

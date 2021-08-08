@@ -9,7 +9,7 @@ GameBall::GameBall(int newX, int newY, double upDirection, double rightDirection
     x = newX;
     y = newY;
     _ballSpeed = ballSpeed;
-    _direction.rotateDirection(-90); //direction vector defaults are to x-axis unit vector so here we rotate that default direction
+    _direction.rotateDirection(-45); //direction vector defaults are to x-axis unit vector so here we rotate that default direction
     
     if (! _ballTexture.loadScaledFromFile(ballTexturePath, 20, 20)) {  // load ball texture
         printf("Greska prilikom ucitavanja slike lopte \"%s\".", ballTexturePath.c_str());
